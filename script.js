@@ -1,10 +1,5 @@
-// var genreOption;
-var fname = $("#fname");
-// var selectedGenre;
-// var selectedMusicGenre;
-// var keyword;
-// var movieID;
-// var randomID = "";
+const axios = require("axios");
+
 var genreCategory = [{
         genre: "Action",
         genreID: 28
@@ -63,10 +58,6 @@ var genreCategory = [{
     }
 ]
 
-
-
-
-
 // Queries movies based on genre selection
 function movieGenre() {
     // event.preventDefault();
@@ -76,10 +67,19 @@ function movieGenre() {
     var genreID = parseInt(selectedGenre);
     // var APIKey = "1a0244fad68dbfa1e242e232ce4a493c"; //TMDB api
     var queryGenre = "https://api.themoviedb.org/3/discover/movie?api_key=1a0244fad68dbfa1e242e232ce4a493c&language=en-US&primary_release_year=2020&with_genres=" + genreID + "&sort_by=popularity.desc&include_adult=false&include_video=false&page=1"; //2020 most popular movies
-    $.ajax({
-        url: queryGenre,
-        method: "GET"
-    }).then(function(response) {
+
+    axios
+      .get(queryGenre)
+
+      .then(function(res) {
+        console.log(res.data);
+      });
+    
+    }
+    // axios.get({
+    //     url: queryGenre,
+    //     method: "GET"
+    // }).then(function(response) {
         // var st = Math.floor(Math.random() * 14);
         // var end = st + 5;
         // for (var i = st; i < end; i++) {
@@ -102,9 +102,9 @@ function movieGenre() {
         //     $("#moviePosterHere").append(br);
 
         // }
-        console.log(response);
-    });
-}
+//         console.log(response);
+//     });
+// }
 
 movieGenre();
 
