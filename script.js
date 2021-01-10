@@ -1,5 +1,4 @@
-// var movie = document.querySelector("#movieTitle");
-const axios = require("axios");
+// const axios = require("axios");
 var genreCategory = [
   {
     genre: "Action",
@@ -69,26 +68,27 @@ function movieGenre() {
     genreID +
     "&sort_by=popularity.desc&include_adult=false&include_video=false&page=1"; //2020 most popular movies
 
-  axios.get(queryGenre).then(function (res) {
-    let results = res.data.results;
-    results.forEach((res) => {
-      var title = res.title;
-      var overview = res.overview;
-      var release = res.release_date;
-      var rating = res.vote_average;
-      var poster = res.poster_path;
-      var genreID = res.genre_ids;
+//   axios.get(queryGenre)
+  $.ajax({
+    url: queryGenre,
+    method: "GET"
+}).then(function (res) {
+    var results = res.results;
+    console.log(res);
+    for(var i = 0; i < results.length; i++){
+      var title = results[i].title;
+      var overview = results[i].overview;
+      var release = results[i].release_date;
+      var rating = results[i].vote_average;
+      var poster = results[i].poster_path;
+    //   var genreID = res.genre_ids;
+      
+      var newDiv = $("<div>");
+      newDiv.text(title);
 
-      console.log(title);
-      console.log(overview);
-      console.log(release);
-      console.log(rating);
-      console.log(poster);
-      console.log(genreID);
-    //   var el = document.createElement("h1");
-    //   el.textContent = title;
-    //   movie.append(el);
-    });
+      $("#movieTitle").append(newDiv);
+
+    }
   });
 }
 
