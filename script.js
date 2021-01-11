@@ -1,4 +1,7 @@
-// const axios = require("axios");
+var movieTitle = document.querySelector("#movieTitle");
+
+
+
 var genreCategory = [
   {
     genre: "Action",
@@ -63,18 +66,17 @@ function movieGenre() {
   console.log(selectedGenre);
   var genreID = parseInt(selectedGenre);
   // var APIKey = "1a0244fad68dbfa1e242e232ce4a493c"; //TMDB api
-  var queryGenre =
+  queryGenre =
     "https://api.themoviedb.org/3/discover/movie?api_key=1a0244fad68dbfa1e242e232ce4a493c&language=en-US&primary_release_year=2020&with_genres=" +
     genreID +
     "&sort_by=popularity.desc&include_adult=false&include_video=false&page=1"; //2020 most popular movies
 
-//   axios.get(queryGenre)
-  $.ajax({
-    url: queryGenre,
-    method: "GET"
-}).then(function (res) {
-    var results = res.results;
-    console.log(res);
+    fetch(queryGenre)
+    .then(response => response.json())
+      .then(data => {
+        let results = data.results;
+      console.log(results);
+    
     for(var i = 0; i < results.length; i++){
       var title = results[i].title;
       var overview = results[i].overview;
@@ -83,13 +85,23 @@ function movieGenre() {
       var poster = results[i].poster_path;
     //   var genreID = res.genre_ids;
       
-      var newDiv = $("<div>");
-      newDiv.text(title);
+      var newDiv = document.createElement("div");
+      newDiv.textContent = title;
 
-      $("#movieTitle").append(newDiv);
+      movieTitle.append(newDiv);
 
     }
   });
-}
+  };
+
 
 movieGenre();
+
+
+//user types in a genre they are looking for
+//user hits enter
+//event listener takes input and makes api get request
+//the results are displayed one at a time
+//user hits left or right button
+//if left, discard, if right, save as object in an array
+//compare simulatneously, the other user's saves. if match, alert user
