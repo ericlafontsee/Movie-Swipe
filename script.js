@@ -71,28 +71,24 @@ var genreCategory = [
 ];
 
 function init() {
-getMovies();
-  // renderQueue(queue);
+  getMovies();
   movieSearch();
 }
+
 function getMovies() {
- queue = JSON.parse(localStorage.getItem("queue"));
-  // if (!queue) queue = [];
+  queue = JSON.parse(localStorage.getItem("queue"));
+  if (!queue) queue = [];
   // return queue;
-renderQueue();
+  renderQueue();
 }
 
-function renderQueue(){
+function renderQueue() {
   queueEl.textContent = queue;
   movieTitle.append(queueEl);
-
 }
-
-  
 
 function movieSearch() {
   selectedGenre = 80;
-  console.log(selectedGenre);
   var genreID = parseInt(selectedGenre);
   // var APIKey = "1a0244fad68dbfa1e242e232ce4a493c"; //TMDB api
   queryGenre =
@@ -126,24 +122,18 @@ function movieSearch() {
       movieTitle.append(pEl3);
     });
 }
+
 rightBtn.addEventListener("click", () => {
   i++;
-  console.log(i);
   movieSearch();
   queue.push(newh1.textContent);
-
   localStorage.setItem("queue", JSON.stringify(queue));
 });
+
 leftBtn.addEventListener("click", () => {
-  if (i > 0) {
-    i--;
-  } else {
-    i = results.length - 1;
-  }
-  console.log(i);
+  i > 0 ? i-- : (i = results.length - 1);
   movieSearch();
 });
-
 
 init();
 
