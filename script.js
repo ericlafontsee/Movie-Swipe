@@ -2,8 +2,12 @@ var movieTitle = document.querySelector("#movieTitle");
 var rightBtn = document.querySelector("#right");
 var leftBtn = document.querySelector("#left");
 let i = 0;
-var newDiv = document.createElement("div");
+var newh1 = document.createElement("h1");
 var img = document.createElement("img");
+var pEl = document.createElement("p");
+var pEl2 = document.createElement("p");
+var pEl3 = document.createElement("p");
+
 let results;
 
 
@@ -66,7 +70,7 @@ var genreCategory = [
   }
 ];
 
-function movieGenre() {
+function movieSearch() {
   selectedGenre = 80;
   console.log(selectedGenre);
   var genreID = parseInt(selectedGenre);
@@ -89,11 +93,18 @@ function movieGenre() {
       var poster = "https://image.tmdb.org/t/p/w500" + results[i].poster_path;
     //   var genreID = res.genre_ids;
       
-      newDiv.textContent = title;
+      newh1.textContent = title;
       img.setAttribute("src", poster);
+      pEl.textContent = "DESCRIPTION: " + overview;
+      pEl2.textContent = "RELEASED: " + release;
+      pEl3.textContent = "RATING: " + rating;
 
-      movieTitle.append(newDiv);
+
+      movieTitle.append(newh1);
       movieTitle.append(img);
+      movieTitle.append(pEl);
+      movieTitle.append(pEl2);
+      movieTitle.append(pEl3);
 
     
   });
@@ -101,7 +112,7 @@ function movieGenre() {
 rightBtn.addEventListener("click", () => {
   i++;
  console.log(i);
- movieGenre();
+ movieSearch();
 })
 leftBtn.addEventListener("click", () => {
   if(i > 0){
@@ -111,10 +122,10 @@ leftBtn.addEventListener("click", () => {
     i = results.length - 1;
   }
  console.log(i);
- movieGenre();
+ movieSearch();
 })
 
-movieGenre();
+movieSearch();
 
 
 //user types in a genre they are looking for
