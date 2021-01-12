@@ -1,5 +1,10 @@
 var movieTitle = document.querySelector("#movieTitle");
-
+var rightBtn = document.querySelector("#right");
+var leftBtn = document.querySelector("#left");
+let i = 0;
+var newDiv = document.createElement("div");
+var img = document.createElement("img");
+let results;
 
 
 var genreCategory = [
@@ -74,26 +79,40 @@ function movieGenre() {
     fetch(queryGenre)
     .then(response => response.json())
       .then(data => {
-        let results = data.results;
+     results = data.results;
       console.log(results);
     
-    for(var i = 0; i < results.length; i++){
       var title = results[i].title;
       var overview = results[i].overview;
       var release = results[i].release_date;
       var rating = results[i].vote_average;
-      var poster = results[i].poster_path;
+      var poster = "https://image.tmdb.org/t/p/w500" + results[i].poster_path;
     //   var genreID = res.genre_ids;
       
-      var newDiv = document.createElement("div");
       newDiv.textContent = title;
+      img.setAttribute("src", poster);
 
       movieTitle.append(newDiv);
+      movieTitle.append(img);
 
-    }
+    
   });
   };
+rightBtn.addEventListener("click", () => {
+  i++;
+ console.log(i);
+ movieGenre();
+})
+leftBtn.addEventListener("click", () => {
+  if(i > 0){
+  i--;
 
+  }else{
+    i = results.length - 1;
+  }
+ console.log(i);
+ movieGenre();
+})
 
 movieGenre();
 
