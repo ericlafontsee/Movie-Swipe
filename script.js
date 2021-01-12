@@ -7,9 +7,9 @@ var img = document.createElement("img");
 var pEl = document.createElement("p");
 var pEl2 = document.createElement("p");
 var pEl3 = document.createElement("p");
-
+var queueEl = document.createElement("p");
+let queue;
 let results;
-
 
 var genreCategory = [
   {
@@ -70,6 +70,26 @@ var genreCategory = [
   }
 ];
 
+function init() {
+getMovies();
+  // renderQueue(queue);
+  movieSearch();
+}
+function getMovies() {
+ queue = JSON.parse(localStorage.getItem("queue"));
+  // if (!queue) queue = [];
+  // return queue;
+renderQueue();
+}
+
+function renderQueue(){
+  queueEl.textContent = queue;
+  movieTitle.append(queueEl);
+
+}
+
+  
+
 function movieSearch() {
   selectedGenre = 80;
   console.log(selectedGenre);
@@ -80,53 +100,52 @@ function movieSearch() {
     genreID +
     "&sort_by=popularity.desc&include_adult=false&include_video=false&page=1"; //2020 most popular movies
 
-    fetch(queryGenre)
-    .then(response => response.json())
-      .then(data => {
-     results = data.results;
+  fetch(queryGenre)
+    .then((response) => response.json())
+    .then((data) => {
+      results = data.results;
       console.log(results);
-    
+
       var title = results[i].title;
       var overview = results[i].overview;
       var release = results[i].release_date;
       var rating = results[i].vote_average;
       var poster = "https://image.tmdb.org/t/p/w500" + results[i].poster_path;
-    //   var genreID = res.genre_ids;
-      
+      //   var genreID = res.genre_ids;
+
       newh1.textContent = title;
       img.setAttribute("src", poster);
       pEl.textContent = "DESCRIPTION: " + overview;
       pEl2.textContent = "RELEASED: " + release;
       pEl3.textContent = "RATING: " + rating;
 
-
       movieTitle.append(newh1);
       movieTitle.append(img);
       movieTitle.append(pEl);
       movieTitle.append(pEl2);
       movieTitle.append(pEl3);
-
-    
-  });
-  };
+    });
+}
 rightBtn.addEventListener("click", () => {
   i++;
- console.log(i);
- movieSearch();
-})
-leftBtn.addEventListener("click", () => {
-  if(i > 0){
-  i--;
+  console.log(i);
+  movieSearch();
+  queue.push(newh1.textContent);
 
-  }else{
+  localStorage.setItem("queue", JSON.stringify(queue));
+});
+leftBtn.addEventListener("click", () => {
+  if (i > 0) {
+    i--;
+  } else {
     i = results.length - 1;
   }
- console.log(i);
- movieSearch();
-})
+  console.log(i);
+  movieSearch();
+});
 
-movieSearch();
 
+init();
 
 //user types in a genre they are looking for
 //user hits enter
