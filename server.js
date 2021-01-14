@@ -3,8 +3,6 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const dbConnection = require('./database');
 const MongoStore = require('connect-mongo')(session);
-
-
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -24,6 +22,7 @@ if (process.env.NODE_ENV === 'production') {
 // connect to mongoose
 mongoose.connect(process.env.MONGODB_URI || `mongodb+srv://${process.env.mongoUser}:${process.env.mongoPassword}@cluster0.ftj0e.mongodb.net/<dbname>?retryWrites=true&w=majority`, 
 { useNewUrlParse: true, useUnifiedTopology: true });
+
 
 // Starting Server 
 app.listen(PORT, () => {
