@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/ericlafontsee/Movie-Swipe#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "react": "^17.0.1"
   }
 }
