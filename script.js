@@ -100,7 +100,6 @@ function movieSearch() {
     .then((response) => response.json())
     .then((data) => {
       results = data.results;
-      console.log(results);
 
       var title = results[i].title;
       var overview = results[i].overview;
@@ -124,7 +123,10 @@ function movieSearch() {
 }
 
 rightBtn.addEventListener("click", () => {
+  results.splice(0);
+  console.log(results[i]);
   i++;
+
   movieSearch();
   queue.push(newh1.textContent);
   localStorage.setItem("queue", JSON.stringify(queue));

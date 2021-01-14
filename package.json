@@ -1,0 +1,22 @@
+{
+  "name": "movie-match",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericlafontsee/Movie-Swipe.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ericlafontsee/Movie-Swipe/issues"
+  },
+  "homepage": "https://github.com/ericlafontsee/Movie-Swipe#readme",
+  "dependencies": {
+    "react": "^17.0.1"
+  }
+}
