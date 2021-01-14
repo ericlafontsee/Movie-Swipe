@@ -2,9 +2,17 @@
   "name": "movie-match",
   "version": "1.0.0",
   "description": "",
-  "main": "script.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'movie-match/*'\" \"npm run client\"",
+    "client": "cd movie-match && npm start",
+    "seed": "node scripts/seedDB.js",
+    "install": "cd movie-match && npm install",
+    "build": "cd movie-match && npm run build",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -17,6 +25,12 @@
   },
   "homepage": "https://github.com/ericlafontsee/Movie-Swipe#readme",
   "dependencies": {
+    "concurrently": "^5.3.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "if-env": "^1.0.4",
+    "mongoose": "^5.11.12",
+    "nodemon": "^2.0.7",
     "react": "^17.0.1"
   }
 }
