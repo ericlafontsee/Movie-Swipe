@@ -33,7 +33,6 @@ export default function Header() {
     return (
         <>
 
-        {getUser()}
             <AppBar className={classes.appbar} position="fixed">
                 <ToolBar disableGutters>
                     <Button className={classes.logoContainer}>
