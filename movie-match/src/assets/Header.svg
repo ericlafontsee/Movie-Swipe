@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1024" height="133" viewBox="0 0 1024 133">
+  <defs>
+    <clipPath id="clip-Web_1920_1">
+      <rect width="1024" height="133"/>
+    </clipPath>
+  </defs>
+  <g id="Web_1920_1" data-name="Web 1920 – 1" clip-path="url(#clip-Web_1920_1)">
+    <rect width="1024" height="133" fill="#ef4b4b"/>
+    <ellipse id="Ellipse_1" data-name="Ellipse 1" cx="38" cy="37.5" rx="38" ry="37.5" transform="translate(38 7)"/>
+    <rect id="Rectangle_1" data-name="Rectangle 1" width="81" height="59" transform="translate(63 37)"/>
+    <path id="Polygon_1" data-name="Polygon 1" d="M25,0,50,60H0Z" transform="translate(98 92) rotate(-90)"/>
+    <rect id="Rectangle_2" data-name="Rectangle 2" width="8" height="65" transform="matrix(-0.803, 0.596, -0.596, -0.803, 148.521, 128.23)"/>
+    <rect id="Rectangle_3" data-name="Rectangle 3" width="8" height="65" transform="translate(97.098 76.047) rotate(36.6)"/>
+    <ellipse id="Ellipse_2" data-name="Ellipse 2" cx="433" cy="61.5" rx="433" ry="61.5" transform="translate(158 5)" fill="#fff" opacity="0.86"/>
+    <text id="Movie_Match" data-name="Movie Match" transform="translate(331.491 97.5)" fill="#707070" stroke="#707070" stroke-width="1" font-size="97" font-family="Vivaldii, Vivaldi"><tspan x="0" y="0">Movie Match</tspan></text>
+  </g>
+</svg>
