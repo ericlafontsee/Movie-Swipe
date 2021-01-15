@@ -12,5 +12,5 @@ export default createMuiTheme({
         primary: {
             main: matchRed
         }
-    }
+    },
 });
