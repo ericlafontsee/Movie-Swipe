@@ -1,11 +1,16 @@
 const express = require('express');
-const session = require('express-session');
+// const session = require('express-session');
+const path = require("path");
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-
-
+// const bodyParser = require('body-parser');
+const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+app.use(express.static(path.join(__dirname, "public")));
+
+// Add routes, both API and view
+app.use(routes);
 
 
 // connect to mongoose
