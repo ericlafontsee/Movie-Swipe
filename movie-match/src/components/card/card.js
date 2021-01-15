@@ -6,6 +6,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
@@ -48,6 +49,9 @@ export default function MovieCard() {
               <Typography variant="body2" color="textSecondary" component="p">
               When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.
               </Typography>
+              {/* <Button onClick={useEffect()}>
+                Click
+              </Button> */}
             </CardContent>
           </Card>
 
