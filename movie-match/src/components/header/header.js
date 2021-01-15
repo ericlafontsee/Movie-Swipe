@@ -11,29 +11,34 @@ import logo from '../../assets/Header.svg';
      logo: {
          height: "8em",
          backgroundColor: "main",
-         
      },
      logoContainer: {
         padding: 0
      },
      appbar: {
          backgroundColor: "#EF4B4B",
-         marginBottom: "5em",
+     },
+     toolbarMargin: {
+         ...theme.mixins.toolbar,
+         marginBootom: "3em"
      }
  }));
+
+
 
 export default function Header() {
     const classes = useStyles();
     const theme = useTheme();
     return (
         <>
-            <AppBar className={classes.appbar}>
+            <AppBar className={classes.appbar} position="fixed">
                 <ToolBar disableGutters>
                     <Button className={classes.logoContainer}>
                         <img alt="site logo" src={logo} className={classes.logo} />
                     </Button>
                 </ToolBar>
             </AppBar>
+            <div className={classes.toolbarMargin} />
         </>
     )
 };
