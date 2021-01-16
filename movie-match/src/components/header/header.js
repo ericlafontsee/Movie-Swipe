@@ -9,18 +9,35 @@ import logo from '../../assets/Header.svg';
 
  const useStyles = makeStyles((theme) => ({
      logo: {
-         height: "8em",
          backgroundColor: "main",
+         height: "8em",
+         [theme.breakpoints.down("md")]: {
+             height: "7em",
+             width: "80%",
+             marginLeft: "-10em"
+         },
+         [theme.breakpoints.down("xs")]: {
+             height: "5.5em",
+             width: "75%",
+             marginLeft: "-5.5em"
+         }
      },
      logoContainer: {
-        padding: 0
+        padding: 0,
      },
      appbar: {
          backgroundColor: "#EF4B4B",
+         zIndex: theme.zIndex.modal + 1
      },
      toolbarMargin: {
          ...theme.mixins.toolbar,
-         marginBootom: "3em"
+         marginBootom: "3em",
+         [theme.breakpoints.down("md")]: {
+             marginBottom: "2em"
+         },
+        [theme.breakpoints.down("xs")]: {
+            marginBottom: "1.25em"
+        }
      }
  }));
 

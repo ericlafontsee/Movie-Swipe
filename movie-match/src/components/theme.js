@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const matchRed = '#EF4B4B';
 const matchGrey = '#707070';
@@ -11,6 +11,23 @@ export default createMuiTheme({
         },
         primary: {
             main: matchRed
+        },
+        secondary: {
+            main: matchGrey
         }
     },
+    typography: {
+        buttonMain: {
+            backgroundColor: matchRed,
+            color: "white",
+            width: "7.5em",
+            height: "2.75em"
+        },
+        buttonSecondary: {
+            backgroundColor: matchGrey,
+            color: "white",
+            width: "7.5em",
+            height: "2.75em"
+        }
+    }
 });
