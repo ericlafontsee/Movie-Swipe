@@ -14,10 +14,48 @@ const useStyles = makeStyles((theme) => ({
   },
   card: {
     marginTop: "10em",
-    maxWidth: "50em"
+    maxWidth: "35em",
+    [theme.breakpoints.down("md")]: {
+      marginTop: "6em",
+      width: "30em"
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "17.5em"
+    }
   },
   media: {
     height: "20em",
+    [theme.breakpoints.down("md")]: {
+      height: "17.5"
+    },
+    [theme.breakpoints.down("xs")]: {
+      height: "15em"
+    }
+  },
+  buttonContainer: {
+    margin: theme.spacing(1)
+  },
+  buttonYes: {
+    ...theme.typography.buttonMain,
+    marginTop: "2em",
+    marginLeft: "13em",
+    [theme.breakpoints.down("md")]: {
+      marginLeft: "9em"
+    },
+    [theme.breakpoints.down("xs")]: {
+      marginLeft: "2.3em"
+    }
+  },
+  buttonNo: {
+    ...theme.typography.buttonSecondary,
+    marginTop: "2em",
+    marginLeft: "4.5em",
+    [theme.breakpoints.down("md")]: {
+      marginLeft: "3em"
+    },
+    [theme.breakpoints.down("xs")]: {
+      marginLeft: "-.75em"
+    }
   }
 }));
 
@@ -49,9 +87,17 @@ export default function MovieCard() {
               <Typography variant="body2" color="textSecondary" component="p">
               When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.
               </Typography>
-              {/* <Button onClick={useEffect()}>
-                Click
-              </Button> */}
+              <Grid container>
+                <Grid item direction="row" className={classes.buttonContainer}>
+              <Button className={classes.buttonNo}>
+                Pass!
+              </Button>
+              <Button className={classes.buttonYes}>
+                Watch!
+              </Button>
+                </Grid>
+
+              </Grid>
             </CardContent>
           </Card>
 
