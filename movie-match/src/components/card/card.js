@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Grow } from "@material-ui/core";
 
+
 const useStyles = makeStyles((theme) => ({
   mainContainer: {},
   posterCard: {
@@ -66,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function MovieCard() {
+export default function MovieCard(props) {
   const classes = useStyles();
   const queryGenre =
     "https://api.themoviedb.org/3/discover/movie?api_key=1a0244fad68dbfa1e242e232ce4a493c&language=en-US&primary_release_year=2020&with_genres=80&sort_by=popularity.desc&include_adult=false&include_video=false&page=1";
@@ -152,6 +153,7 @@ export default function MovieCard() {
           >
           <Card className={classes.backdropCard}>
             <CardActionArea>
+\
               <CardMedia
                 className={classes.backdropImage}
                 component="image"
@@ -160,6 +162,7 @@ export default function MovieCard() {
             </CardActionArea>
             <CardContent>
               {`${movieState.description}`}
+
             </CardContent>
           </Card>
 
