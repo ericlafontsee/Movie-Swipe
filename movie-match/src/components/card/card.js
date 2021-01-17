@@ -7,26 +7,42 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import InfoIcon from '@material-ui/icons/Info';
+import InfoIcon from "@material-ui/icons/Info";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Grow } from "@material-ui/core";
-
+import Collapse from "@material-ui/core/Collapse";
+import ThumbUpTwoToneIcon from "@material-ui/icons/ThumbUpTwoTone";
+import ThumbDownTwoToneIcon from "@material-ui/icons/ThumbDownTwoTone";
+import StarRoundedIcon from '@material-ui/icons/StarRounded';
 
 const useStyles = makeStyles((theme) => ({
-  mainContainer: {},
+  cardContainer: {
+    width: "100%",
+  },
   posterCard: {
     marginTop: "10em",
+    width: "16.7em",
+    maxWidth: "16.65em",
+    margin: "3em",
+    [theme.breakpoints.down("md")]: {
+      marginTop: "8em",
+    },
+  },
+  backdropCard: {
+    maxHeight: "25em",
+    maxWidth: "30em",
+    marginTop: "10em",
+    marginRight: "1em",
+    [theme.breakpoints.down("md")]: {
+      marginTop: "2.5em",
+    },
   },
   cardHeader: {
     color: theme.palette.common.grey,
     opacity: 1,
-    height: "5%"
-  },
-  backdropCard: {
-    width: "50%",
-    marginTop: "10em"
+    height: ".5em",
   },
   posterImage: {
     height: "30em",
@@ -34,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
   backdropImage: {
     height: "15em",
-    width: "40em"
+    width: "100%",
   },
   buttonContainer: {
     margin: theme.spacing(1),
@@ -63,7 +79,18 @@ const useStyles = makeStyles((theme) => ({
   },
   ratingContainer: {
     marginTop: "1em",
-    marginLeft: "2em"
+    marginLeft: "2em",
+  },
+  thumbsUp: {
+    color: "darkGreen",
+  },
+  rating: {
+    fontSize: "22px",
+    position: "relative",
+    bottom: 9
+  },
+  ratingIcon: {
+    marginTop: 5,
   }
 }));
 
@@ -79,6 +106,7 @@ export default function MovieCard(props) {
     backdropImage: "",
     description: "",
     rating: "",
+    reviewCount: "",
     release: "",
     genre: "",
   });
@@ -86,7 +114,7 @@ export default function MovieCard(props) {
   const [checked, setChecked] = useState(false);
 
   const handleInfoButton = () => {
-    setChecked((prev) => !prev);
+    setChecked(!checked);
   };
 
   useEffect(() => {
@@ -102,6 +130,7 @@ export default function MovieCard(props) {
         rating: results[0].vote_average,
         reviewCount: results[0].vote_count,
         release: results[0].release_date,
+        genre: results[0].genre
       });
       console.log(movieState.title);
     });
@@ -109,64 +138,79 @@ export default function MovieCard(props) {
 
   return (
     <>
-      <Grid 
-        container 
-        direction="row" 
-        justify="center" 
+      <Grid
+        container
+        className={classes.cardContainer}
+        direction="row"
+        justify="center"
+        alignContent="flex-end"
         alignItems="center"
       >
-        <Grid 
-          item
-          style={{ marginRight:"1em" }}>
-          <Card className={classes.posterCard}>
-            <CardActionArea>
+        <Grid item>
+          <Button>
+            <ThumbDownTwoToneIcon fontSize="large" color="primary" />
+          </Button>
+        </Grid>
+        <Card className={classes.posterCard}>
+          <CardActionArea>
             <CardMedia
               className={classes.posterImage}
               component="image"
-              image={"https://www.themoviedb.org/t/p/w600_and_h900_bestv2"+`${movieState.posterImage}`}
-            >
-              </CardMedia>
-            </CardActionArea>
-            <CardContent>
+              image={
+                "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" +
+                `${movieState.posterImage}`
+              }
+            ></CardMedia>
+          </CardActionArea>
+          <CardContent>
             <CardHeader
-                  className={classes.cardHeader}
-                  title={`${movieState.title}`}
-                  subheader={`${movieState.release}`}
-                  action={
-                    <IconButton aria-label="information">
-                      <InfoIcon 
-                        onClick={handleInfoButton}  
-                      />
-                    </IconButton>
-                  }
+              className={classes.cardHeader}
+              title={`${movieState.title}`}
+              subheader={`${movieState.release}`}
+              action={
+                <IconButton aria-label="information">
+                  <InfoIcon onClick={handleInfoButton} />
+                </IconButton>
+              }
             />
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid 
-          item
-          style={{ marginLeft:"1em" }}>
-          <Grow 
+          </CardContent>
+        </Card>
+        <Collapse in={checked} timeout="auto" unmountOnExit>
+          <Grow
             in={checked}
-            style={{ transformOrigin: '0 0 0' }}
+            style={{ transformOrigin: "0 0 0" }}
             {...(checked ? { timeout: 1000 } : {})}
           >
-          <Card className={classes.backdropCard}>
-            <CardActionArea>
-\
-              <CardMedia
-                className={classes.backdropImage}
-                component="image"
-                image={"https://www.themoviedb.org/t/p/w600_and_h900_bestv2"+`${movieState.backdropImage}`}
+            <Card className={classes.backdropCard}>
+              <CardActionArea>
+                <CardMedia
+                  className={classes.backdropImage}
+                  component="image"
+                  image={
+                    "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" +
+                    `${movieState.backdropImage}`
+                  }
                 />
-            </CardActionArea>
-            <CardContent>
-              {`${movieState.description}`}
-
-            </CardContent>
-          </Card>
-
+              </CardActionArea>
+              <CardContent>
+                {`${movieState.description}`}
+                <div />
+                <StarRoundedIcon className={classes.ratingIcon} fontSize="large"/> 
+                <span className={classes.rating}>
+                {`${movieState.rating}`} / 10
+                </span>
+              </CardContent>
+            </Card>
           </Grow>
+        </Collapse>
+        <Grid item>
+          <Button>
+            <ThumbUpTwoToneIcon
+              className={classes.thumbsUp}
+              fontSize="large"
+              color="inherit"
+            />
+          </Button>
         </Grid>
       </Grid>
     </>
