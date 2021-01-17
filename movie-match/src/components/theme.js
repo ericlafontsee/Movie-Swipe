@@ -2,12 +2,14 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const matchRed = '#EF4B4B';
 const matchGrey = '#707070';
+const matchLightGrey = '#afafac'
 
 export default createMuiTheme({
     palette: {
         common: {
             red: matchRed,
-            grey: matchGrey
+            grey: matchGrey,
+            lightGrey: matchLightGrey
         },
         primary: {
             main: matchRed

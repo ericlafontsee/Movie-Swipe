@@ -12,27 +12,27 @@ const queryGenre =
 
 function App() {
  
-  const [movieState, setmovieState] = useState({
-    title: "",
-    image: "",
-    description: "",
-    rating: "",
-    release: "",
-    genre: ""
-  });
+  // const [movieState, setmovieState] = useState({
+  //   title: "",
+  //   image: "",
+  //   description: "",
+  //   rating: "",
+  //   release: "",
+  //   genre: ""
+  // });
 
 
 
      
-  useEffect(() => {
+  // useEffect(() => {
 
-    axios.get(queryGenre).then((response) => {
-      results = response.data.results;
-    console.log(results);
-    setmovieState({ ...movieState, title: results[5].title });
-    console.log(movieState.title);
-  });
-  }, []);
+  //   axios.get(queryGenre).then((response) => {
+  //     results = response.data.results;
+  //   console.log(results);
+  //   setmovieState({ ...movieState, title: results[5].title });
+  //   console.log(movieState.title);
+  // });
+  // }, []);
   
   
   return (
