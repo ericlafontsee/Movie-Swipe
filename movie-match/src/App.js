@@ -20,7 +20,8 @@ function App() {
   //   genre: ""
   // });
 
-     
+
+
   // useEffect(() => {
 
   //   axios.get(queryGenre).then((response) => {
