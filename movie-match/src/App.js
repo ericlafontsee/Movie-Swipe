@@ -2,7 +2,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/styles';
 import theme from "./components/theme";
 import Header from './components/header/header';
-import LandingPage from './pages/landing';
+import MatchingPage from './pages/matching';
+import LoginPage from './pages/login';
 import React from "react";
 // let results;
 // const queryGenre =
@@ -41,7 +42,12 @@ function App() {
           <Route
             exact
             path="/"
-            component={LandingPage}
+            component={MatchingPage}
+          />
+          <Route
+            exact
+            path="/login"
+            component={LoginPage}
           />
         </Switch>
       </BrowserRouter>
