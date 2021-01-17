@@ -9,35 +9,53 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import InfoIcon from "@material-ui/icons/Info";
 import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Grow } from "@material-ui/core";
 import Collapse from "@material-ui/core/Collapse";
 import ThumbUpTwoToneIcon from "@material-ui/icons/ThumbUpTwoTone";
 import ThumbDownTwoToneIcon from "@material-ui/icons/ThumbDownTwoTone";
 import StarRoundedIcon from '@material-ui/icons/StarRounded';
+import Container from "@material-ui/core/Container";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const useStyles = makeStyles((theme) => ({
   cardContainer: {
     width: "100%",
   },
+  thumbsContainer: {
+    marginTop: "3em",
+  },
   posterCard: {
-    marginTop: "10em",
+    marginTop: "8em",
     width: "16.7em",
-    maxWidth: "16.65em",
+    maxWidth: "16.7em",
     margin: "3em",
     [theme.breakpoints.down("md")]: {
       marginTop: "8em",
     },
+    [theme.breakpoints.down("sm")]: {
+      width: "15em",
+      margin: "1em",
+      marginTop: "8em"
+    }
   },
   backdropCard: {
     maxHeight: "25em",
-    maxWidth: "30em",
-    marginTop: "10em",
-    marginRight: "1em",
+    maxWidth: "16.7em",
+    width: "16.7em",
+    marginTop: "4em",
+    marginRight: "3em",
     [theme.breakpoints.down("md")]: {
-      marginTop: "2.5em",
+      marginTop: "4em",
+      height: "30em",
+      width: "16.7em",
+      maxWidth: "16.7em",
     },
+    [theme.breakpoints.down("sm")]: {
+      width: "15em",
+      marginRight: "1em",
+      marginTop: "8em"
+    }
   },
   cardHeader: {
     color: theme.palette.common.grey,
@@ -55,50 +73,31 @@ const useStyles = makeStyles((theme) => ({
   buttonContainer: {
     margin: theme.spacing(1),
   },
-  buttonYes: {
-    ...theme.typography.buttonMain,
-    marginTop: "2em",
-    marginLeft: "13em",
-    [theme.breakpoints.down("md")]: {
-      marginLeft: "9em",
-    },
-    [theme.breakpoints.down("xs")]: {
-      marginLeft: "2.3em",
-    },
-  },
-  buttonNo: {
-    ...theme.typography.buttonSecondary,
-    marginTop: "2em",
-    marginLeft: "4.5em",
-    [theme.breakpoints.down("md")]: {
-      marginLeft: "3em",
-    },
-    [theme.breakpoints.down("xs")]: {
-      marginLeft: "-.75em",
-    },
-  },
-  ratingContainer: {
-    marginTop: "1em",
-    marginLeft: "2em",
-  },
   thumbsUp: {
     color: "darkGreen",
+  },
+  thumbsDown: {
+    color: theme.palette.common.red,
   },
   rating: {
     fontSize: "22px",
     position: "relative",
-    bottom: 9
+    bottom: 8
+    
   },
   ratingIcon: {
-    marginTop: 5,
+    marginTop: ".75em",
   }
 }));
 
 export default function MovieCard(props) {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("sm"));
   const queryGenre =
     "https://api.themoviedb.org/3/discover/movie?api_key=1a0244fad68dbfa1e242e232ce4a493c&language=en-US&primary_release_year=2020&with_genres=80&sort_by=popularity.desc&include_adult=false&include_video=false&page=1";
-  let results;
+  
+  let results = [];
 
   const [movieState, setmovieState] = useState({
     title: "",
@@ -132,12 +131,83 @@ export default function MovieCard(props) {
         release: results[0].release_date,
         genre: results[0].genre
       });
+      localStorage.setItem('movieArray', JSON.stringify(results))
       console.log(movieState.title);
     });
   }, []);
 
+  
+  const handleNo = () => {
+    results = JSON.parse(localStorage.getItem('movieArray'))
+    results.shift();
+    localStorage.setItem('movieArray', JSON.stringify(results))
+    console.log("new index?", results);
+    setmovieState({
+      ...movieState,
+      title: results[0].title,
+      posterImage: results[0].poster_path,
+      backdropImage: results[0].backdrop_path,
+      description: results[0].overview,
+      rating: results[0].vote_average,
+      reviewCount: results[0].vote_count,
+      release: results[0].release_date,
+      genre: results[0].genre
+    });
+    
+  }
+
+  const handleYes = () => {
+    results = JSON.parse(localStorage.getItem('movieArray'))
+    results.shift();
+    localStorage.setItem('movieArray', JSON.stringify(results))
+    console.log("new index?", results);
+    setmovieState({
+      ...movieState,
+      title: results[0].title,
+      posterImage: results[0].poster_path,
+      backdropImage: results[0].backdrop_path,
+      description: results[0].overview,
+      rating: results[0].vote_average,
+      reviewCount: results[0].vote_count,
+      release: results[0].release_date,
+      genre: results[0].genre
+    });
+  }
+
+  const thumbsDown = (
+    <>
+      <Grid item>
+        <Button
+          onClick={handleNo}
+        >
+          <ThumbDownTwoToneIcon
+            className={classes.thumbsDown}
+            fontSize="large"
+          />
+        </Button>
+      </Grid>
+    </>
+  )
+
+  const thumbsUp = (
+    <>
+      <Grid item>
+        <Button
+          onClick={handleYes}
+        >
+          <ThumbUpTwoToneIcon
+            className={classes.thumbsUp}
+            fontSize="large"
+            color="primary"
+          />
+        </Button>
+      </Grid>
+    </>
+  )
   return (
     <>
+    <Container>
+
       <Grid
         container
         className={classes.cardContainer}
@@ -146,11 +216,7 @@ export default function MovieCard(props) {
         alignContent="flex-end"
         alignItems="center"
       >
-        <Grid item>
-          <Button>
-            <ThumbDownTwoToneIcon fontSize="large" color="primary" />
-          </Button>
-        </Grid>
+        {matches ? null : thumbsDown }
         <Card className={classes.posterCard}>
           <CardActionArea>
             <CardMedia
@@ -203,16 +269,24 @@ export default function MovieCard(props) {
             </Card>
           </Grow>
         </Collapse>
-        <Grid item>
-          <Button>
-            <ThumbUpTwoToneIcon
-              className={classes.thumbsUp}
-              fontSize="large"
-              color="inherit"
-            />
-          </Button>
+        { matches ? null : thumbsUp }
+      </Grid>
+      <Grid 
+        container
+        className={classes.thumbsContainer}
+        direction="row"
+        justify="center"
+        alignContent="flex-end"
+        alignItems="center"
+      >
+        <Grid item style={{ marginRight: "5em" }}>
+          { matches ? thumbsDown : null }
+        </Grid>
+        <Grid item style={{ marginLeft: "5em" }}>
+          { matches ? thumbsUp : null }
         </Grid>
       </Grid>
+    </Container>
     </>
   );
 }
