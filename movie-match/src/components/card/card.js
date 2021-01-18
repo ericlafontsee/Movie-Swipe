@@ -17,6 +17,7 @@ import ThumbDownTwoToneIcon from "@material-ui/icons/ThumbDownTwoTone";
 import StarRoundedIcon from '@material-ui/icons/StarRounded';
 import Container from "@material-ui/core/Container";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import API from "../../utils/API";
 
 const useStyles = makeStyles((theme) => ({
   cardContainer: {
@@ -136,7 +137,18 @@ export default function MovieCard(props) {
     });
   }, []);
 
-  
+  function addMovie(movieState) {
+    console.log("addmovie", movieState);
+    return API.saveMovie({
+      movieState  
+    })
+      .then((res) => {
+        console.log("response", res);
+        return res.data;
+      })
+      .catch((err) => console.log(err));
+  }
+
   const handleNo = () => {
     results = JSON.parse(localStorage.getItem('movieArray'))
     results.shift();
@@ -172,7 +184,8 @@ export default function MovieCard(props) {
       release: results[0].release_date,
       genre: results[0].genre
     });
-  }
+    addMovie(movieState);
+  };
 
   const thumbsDown = (
     <>
