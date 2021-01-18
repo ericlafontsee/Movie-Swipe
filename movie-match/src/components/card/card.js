@@ -153,12 +153,8 @@ export default function MovieCard() {
 
   const handleYes = () => {
     results = JSON.parse(localStorage.getItem('movieArray'));
-    let currentResult = results[0];
+    let movieData = results[0];
     
-    // API.saveMovie(currentResult)
-    // .then(res => console.log(res))
-    // .catch(err => console.log(err));
-
     results.shift();
     localStorage.setItem('movieArray', JSON.stringify(results));
     setmovieState({
@@ -172,6 +168,12 @@ export default function MovieCard() {
       release: results[0].release_date,
       genre: results[0].genre
     });
+
+
+    API.saveMovie(movieData)
+    .then(res => console.log(res))
+    .catch(err => console.log("err"));
+
   }
 
   const thumbsDown = (
