@@ -1,4 +1,5 @@
-module.exports = {
-    Movie: require("./movie")
-  };
-  
+
+const Movie = require("./movie");
+
+module.exports = {Movie};
+

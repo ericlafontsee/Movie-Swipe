@@ -2,39 +2,29 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const movieSchema = new Schema({
-  title: {
-    type: String,
-    required: true
-  },
-  posterImage: {
-    type: String,
-    required: true
-  },
-  backdropImage: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
-  },
-  rating: {
-    type: Number,
-    required: true
-  },
-  reviewCount: {
-    type: Number,
-    required: true
-  },
-  release: {
-    type: Date,
-    required: true
-  },
-  genre: {
-    type: String,
-    required: true
-  }
+
+  title: { type: String,  },
+  posterImage: { type: String,  },
+  backdropImage: { type: String, },
+  description: { type: String,  },
+  rating: { type: Number,  },
+  reviewCount: { type: Number,  },
+  release: { type: Date,  },
+  genre: { type: String,  }
 });
 
-const Movie = mongoose.model("Movie", movieSchema);
+const Movie = mongoose.model("Movies", movieSchema);
+
 module.exports = Movie;
+
+
+// title
+// posterImage
+// backdropImage
+// description
+// rating
+// reviewCount
+// release
+// genre
+
+
