@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export default {
+
   // Gets all movies
   getMovies: function() {
     return axios.get("/api/movies/");
@@ -14,6 +15,7 @@ export default {
     return axios.delete("/api/movies/" + id);
   },
   saveMovie: function(movieData) {
+
     return axios.post("/api/movies", movieData);
   }
 };

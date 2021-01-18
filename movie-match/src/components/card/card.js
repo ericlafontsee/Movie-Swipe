@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles, useTheme } from "@material-ui/styles";
-import axios from "axios";
+import API from '../../utils/API';
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -91,13 +91,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function MovieCard(props) {
+export default function MovieCard() {
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
-  const queryGenre =
-    "https://api.themoviedb.org/3/discover/movie?api_key=1a0244fad68dbfa1e242e232ce4a493c&language=en-US&primary_release_year=2020&with_genres=80&sort_by=popularity.desc&include_adult=false&include_video=false&page=1";
-  
   let results = [];
 
   const [movieState, setmovieState] = useState({
@@ -118,7 +115,7 @@ export default function MovieCard(props) {
   };
 
   useEffect(() => {
-    axios.get(queryGenre).then((response) => {
+    API.getMovie().then((response) => {
       results = response.data.results;
       console.log(results);
       setmovieState({
@@ -133,7 +130,6 @@ export default function MovieCard(props) {
         genre: results[0].genre
       });
       localStorage.setItem('movieArray', JSON.stringify(results))
-      console.log(movieState.title);
     });
   }, []);
 
@@ -153,7 +149,6 @@ export default function MovieCard(props) {
     results = JSON.parse(localStorage.getItem('movieArray'))
     results.shift();
     localStorage.setItem('movieArray', JSON.stringify(results))
-    console.log("new index?", results);
     setmovieState({
       ...movieState,
       title: results[0].title,
@@ -169,10 +164,11 @@ export default function MovieCard(props) {
   }
 
   const handleYes = () => {
-    results = JSON.parse(localStorage.getItem('movieArray'))
+    results = JSON.parse(localStorage.getItem('movieArray'));
+    let movieData = results[0];
+    
     results.shift();
-    localStorage.setItem('movieArray', JSON.stringify(results))
-    console.log("new index?", results);
+    localStorage.setItem('movieArray', JSON.stringify(results));
     setmovieState({
       ...movieState,
       title: results[0].title,
@@ -184,8 +180,10 @@ export default function MovieCard(props) {
       release: results[0].release_date,
       genre: results[0].genre
     });
+
     addMovie(movieState);
   };
+
 
   const thumbsDown = (
     <>
