@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const movieSchema = new Schema({
+
   title: { type: String,  },
   posterImage: { type: String,  },
   backdropImage: { type: String, },
@@ -25,3 +26,5 @@ module.exports = Movie;
 // reviewCount
 // release
 // genre
+
+
