@@ -17,7 +17,7 @@ function Saved() {
     <div className="saved">
   
         <div>
-        {savedMovies.map((movie, index ) => <h2 key={index} {...movie} />)}
+        {/* {savedMovies.map((movie, index ) => <h2 key={index} {...movie} />)} */}
         </div>
     </div>
   );
