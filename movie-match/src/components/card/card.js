@@ -140,7 +140,7 @@ export default function MovieCard(props) {
   function addMovie(movieState) {
     console.log("addmovie", movieState);
     return API.saveMovie({
-      movieState  
+      ...movieState  
     })
       .then((res) => {
         console.log("response", res);
