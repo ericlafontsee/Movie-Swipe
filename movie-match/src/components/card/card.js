@@ -26,17 +26,17 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "3em",
   },
   posterCard: {
-    marginTop: "8em",
+    marginTop: "5em",
     width: "16.7em",
     maxWidth: "16.7em",
     margin: "3em",
     [theme.breakpoints.down("md")]: {
-      marginTop: "8em",
+      marginTop: "2em",
     },
     [theme.breakpoints.down("sm")]: {
       width: "15em",
       margin: "1em",
-      marginTop: "8em"
+      marginTop: "-1em"
     }
   },
   backdropCard: {
