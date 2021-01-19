@@ -18,13 +18,6 @@ const Movie = mongoose.model("Movies", movieSchema);
 module.exports = Movie;
 
 
-// title
-// posterImage
-// backdropImage
-// description
-// rating
-// reviewCount
-// release
-// genre
+
 
 
