@@ -17,7 +17,6 @@ import ThumbDownTwoToneIcon from "@material-ui/icons/ThumbDownTwoTone";
 import StarRoundedIcon from '@material-ui/icons/StarRounded';
 import Container from "@material-ui/core/Container";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import API from "../../utils/API";
 
 const useStyles = makeStyles((theme) => ({
   cardContainer: {
@@ -115,7 +114,7 @@ export default function MovieCard() {
   };
 
   useEffect(() => {
-    API.getMovie().then((response) => {
+    API.getMovies().then((response) => {
       results = response.data.results;
       console.log(results);
       setmovieState({
