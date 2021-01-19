@@ -14,10 +14,21 @@ console.log(savedMovies);
       .catch((err) => console.log(err));
   }, []);
 
+
+  function deleteMovie(id){
+    console.log("delete");
+    API.deleteBook(id)
+    .then(res => {
+      window.location.reload();
+    })
+    .catch(err => console.log(err));
+  }
+
   return (
     <div className="saved">
         <div>
-        {/* {savedMovies.map((movie, index ) => <SavedCard key={index} {...movie} /> )} */}
+        {savedMovies.map((movie, index ) => <button id={movie._id} onClick={() => deleteMovie(movie._id)}> {movie.title} </button> )}
+
         </div>
     </div>
   );
