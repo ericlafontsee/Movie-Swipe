@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import SavedCard from "../components/Savedcard";
+// import SavedCard from "../components/Savedcard";
 import API from "../utils/API";
 
 function Saved() {
@@ -17,7 +17,7 @@ console.log(savedMovies);
   return (
     <div className="saved">
         <div>
-        {savedMovies.map((movie, index ) => <SavedCard key={index} {...movie} /> )}
+        {/* {savedMovies.map((movie, index ) => <SavedCard key={index} {...movie} /> )} */}
         </div>
     </div>
   );
