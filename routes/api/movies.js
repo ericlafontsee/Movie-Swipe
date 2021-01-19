@@ -7,7 +7,7 @@ router
   .get(moviesController.findAll)
   .post(moviesController.create);
 
-// Matches with "/api/movies/:id"
+// Matches zwith "/api/movies/:id"
 router
   .route("/:id")
   .get(moviesController.findById)

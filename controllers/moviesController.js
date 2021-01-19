@@ -20,7 +20,6 @@ module.exports = {
   create: function(req, res) {
     db.Movie
       .create(req.body)
-
       .then(data => (res.json(data)))
       .catch(err => res.status(422).json(err));
   },
@@ -33,7 +32,7 @@ module.exports = {
   remove: function(req, res) {
     db.Movie
       .findById({ _id: req.params.id })
-      .thne(dbModel => dbModel.remove())
+      .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }

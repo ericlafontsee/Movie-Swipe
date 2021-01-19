@@ -116,7 +116,6 @@ export default function MovieCard() {
   useEffect(() => {
     API.getMovies(pageNumber).then((response) => {
       results = response.data.results;
-      console.log(results);
       setmovieState({
         ...movieState,
         title: results[0].title,
@@ -137,7 +136,6 @@ export default function MovieCard() {
       ...movieState
     })
       .then((res) => {
-        console.log("response", res);
         return res.data;
       })
       .catch((err) => console.log(err));
