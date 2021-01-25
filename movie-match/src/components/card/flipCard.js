@@ -2,24 +2,13 @@ import { useSpring, animated as a } from "react-spring";
 import "./styles.css";
 import React, { useState, useEffect } from "react";
 import { makeStyles, useTheme } from "@material-ui/styles";
-
 import API from "../../utils/API";
 import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import InfoIcon from "@material-ui/icons/Info";
-import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
-import { Grow } from "@material-ui/core";
-import Collapse from "@material-ui/core/Collapse";
 import ThumbUpTwoToneIcon from "@material-ui/icons/ThumbUpTwoTone";
 import ThumbDownTwoToneIcon from "@material-ui/icons/ThumbDownTwoTone";
-import StarRoundedIcon from "@material-ui/icons/StarRounded";
-import Container from "@material-ui/core/Container";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import StarRoundedIcon from "@material-ui/icons/StarRounded";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,52 +16,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%"
   },
   thumbsContainer: {
-    marginTop: "3em"
-  },
-  posterCard: {
-    marginTop: "5em",
-    width: "16.7em",
-    maxWidth: "16.7em",
     margin: "3em",
-    [theme.breakpoints.down("md")]: {
-      marginTop: "2em",
-    },
-    [theme.breakpoints.down("sm")]: {
-      width: "15em",
-      margin: "1em",
-      marginTop: "-1em"
-    }
-  },
-  backdropCard: {
-    maxHeight: "25em",
-    maxWidth: "16.7em",
-    width: "16.7em",
-    marginTop: "4em",
-    marginRight: "3em",
-    [theme.breakpoints.down("md")]: {
-      marginTop: "4em",
-      height: "30em",
-      width: "16.7em",
-      maxWidth: "16.7em"
-    },
-    [theme.breakpoints.down("sm")]: {
-      width: "15em",
-      marginRight: "1em",
-      marginTop: "8em"
-    }
-  },
-  cardHeader: {
-    color: theme.palette.common.grey,
-    opacity: 1,
-    height: ".5em"
-  },
-  posterImage: {
-    height: "30em",
-    width: "20em"
-  },
-  backdropImage: {
-    height: "15em",
-    width: "100%"
   },
   buttonContainer: {
     margin: theme.spacing(1)
@@ -126,9 +70,6 @@ export default function FlipCard() {
     "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" +
     movieState.backdropImage;
 
-  const handleInfoButton = () => {
-    setChecked(!checked);
-  };
 
   useEffect(() => {
     API.getMovies(pageNumber).then((response) => {
@@ -255,9 +196,7 @@ export default function FlipCard() {
   );
 
   return (
- 
-   
-
+  
     <div onClick={() => set((state) => !state)}>
     {matches ? null : thumbsDown}
       <a.div
@@ -271,12 +210,21 @@ export default function FlipCard() {
       <a.div
         className="c front"
         style={{
+          backgroundImage: `url(${backImage})`,
           opacity,
           transform: transform.interpolate((t) => `${t} rotateX(180deg)`)
         }}
       >
-        {movieState.description}
+        <div className="movieInfo">
+       {movieState.description}
+       <p>
+       <StarRoundedIcon
+                    className={classes.ratingIcon}
+                    fontSize="large"
+                  />
         <span>{`${movieState.rating}`} / 10</span>
+        </p>
+        </div>
       </a.div>
       <Grid
           container
