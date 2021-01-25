@@ -28,9 +28,19 @@ body,
   will-change: transform, opacity;
 }
 
-.front,
 .back {
   background-size: cover;
+}
+
+.front {
+  background-size: 50%;
+ background-repeat: no-repeat;
+}
+
+.movieInfo{
+  position: absolute;
+  left: 225px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 /* 
 .back {
