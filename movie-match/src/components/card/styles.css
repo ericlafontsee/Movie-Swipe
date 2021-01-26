@@ -10,7 +10,7 @@ body,
   background: #f0f0f0;
 }
 
-#root > div {
+.container {
   width: 100%;
   height: 100%;
   display: flex;
@@ -19,26 +19,35 @@ body,
 }
 
 .c {
-  position: absolute;
-  max-width: 500px;
-  max-height: 500px;
-  width: 50ch;
-  height: 50ch;
+  position: relative;
+  width: 50%;
+  height: 50%;
   cursor: pointer;
   will-change: transform, opacity;
 }
 
-.back {
-  background-size: cover;
+.imageBack {
+  object-fit: contain;
+  position: absolute;
+  width: 50%;
+  height: 50%;  
 }
 
 .front {
-  background-size: 50%;
- background-repeat: no-repeat;
+  position: absolute;
+  background: center;
+  max-width: 15em;
+  max-height: 35em;
+  background-size: cover;
+}
+
+.back { 
+  position: absolute;
+  background: center;
 }
 
 .movieInfo{
-  position: absolute;
+  
   left: 225px;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }

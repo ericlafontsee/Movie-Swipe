@@ -12,6 +12,8 @@ import StarRoundedIcon from "@material-ui/icons/StarRounded";
 
 
 const useStyles = makeStyles((theme) => ({
+  mainContainer: {
+  },
   cardContainer: {
     width: "100%"
   },
@@ -67,7 +69,7 @@ export default function FlipCard() {
     "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" +
     movieState.posterImage;
   let backImage =
-    "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" +
+    "https://www.themoviedb.org/t/p/w1280_and_h720_bestv2" +
     movieState.backdropImage;
 
 
@@ -194,13 +196,15 @@ export default function FlipCard() {
       </Grid>
     </>
   );
-
-  return (
   
-    <div onClick={() => set((state) => !state)}>
+  return (
+    <>
+    <div className="container">
+
+    <div  onClick={() => set((state) => !state)}>
     {matches ? null : thumbsDown}
       <a.div
-        className="c back"
+        className="c front"
         style={{
           backgroundImage: `url(${frontImage})`,
           opacity: opacity.interpolate((o) => 1 - o),
@@ -208,13 +212,14 @@ export default function FlipCard() {
         }}
       ></a.div>
       <a.div
-        className="c front"
+        className="c back"
         style={{
-          backgroundImage: `url(${backImage})`,
+          // backgroundImage: `url(${backImage})`,
           opacity,
           transform: transform.interpolate((t) => `${t} rotateX(180deg)`)
         }}
       >
+        <img className="imageBack" src={`${backImage}`} />
         <div className="movieInfo">
        {movieState.description}
        <p>
@@ -243,5 +248,7 @@ export default function FlipCard() {
         </Grid>
         {matches ? null : thumbsUp}
     </div>
+    </div>
+  </>
   );
 }
