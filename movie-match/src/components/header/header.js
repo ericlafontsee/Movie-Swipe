@@ -203,7 +203,6 @@ export default function Header(props) {
             </AppBar>
             {renderMobileMenu}
             {renderMenu}
-            <div className={classes.toolbarMargin} />
         </>
     )
 };
