@@ -10,15 +10,13 @@ import ThumbDownTwoToneIcon from "@material-ui/icons/ThumbDownTwoTone";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import StarRoundedIcon from "@material-ui/icons/StarRounded";
 
-
 const useStyles = makeStyles((theme) => ({
-  mainContainer: {
-  },
+  mainContainer: {},
   cardContainer: {
     width: "100%"
   },
   thumbsContainer: {
-    margin: "3em",
+    margin: "3em"
   },
   buttonContainer: {
     margin: theme.spacing(1)
@@ -38,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: ".75em"
   }
 }));
-
 
 export default function FlipCard() {
   const classes = useStyles();
@@ -71,7 +68,6 @@ export default function FlipCard() {
   let backImage =
     "https://www.themoviedb.org/t/p/w1280_and_h720_bestv2" +
     movieState.backdropImage;
-
 
   useEffect(() => {
     API.getMovies(pageNumber).then((response) => {
@@ -151,21 +147,20 @@ export default function FlipCard() {
     if (results.length === 1) {
       handleShift();
     } else {
-
-    results.shift();
-    localStorage.setItem("movieArray", JSON.stringify(results));
-    setmovieState({
-      ...movieState,
-      title: results[0].title,
-      posterImage: results[0].poster_path,
-      backdropImage: results[0].backdrop_path,
-      description: results[0].overview,
-      rating: results[0].vote_average,
-      reviewCount: results[0].vote_count,
-      release: results[0].release_date,
-      genre: results[0].genre
-    });
-  }
+      results.shift();
+      localStorage.setItem("movieArray", JSON.stringify(results));
+      setmovieState({
+        ...movieState,
+        title: results[0].title,
+        posterImage: results[0].poster_path,
+        backdropImage: results[0].backdrop_path,
+        description: results[0].overview,
+        rating: results[0].vote_average,
+        reviewCount: results[0].vote_count,
+        release: results[0].release_date,
+        genre: results[0].genre
+      });
+    }
     addMovie(movieState);
   };
 
@@ -182,7 +177,6 @@ export default function FlipCard() {
     </>
   );
 
-
   const thumbsUp = (
     <>
       <Grid item>
@@ -196,64 +190,55 @@ export default function FlipCard() {
       </Grid>
     </>
   );
-  
+
   return (
     <>
-    <div>
-
-    <div onClick={() => set((state) => !state)}>
-    {matches ? null : thumbsDown}
-      <a.div
-        className="c front"
-        style={{
-          backgroundImage: `url(${frontImage})`,
-          opacity: opacity.interpolate((o) => 1 - o),
-          transform
-        }}
-      ></a.div>
-      <a.div
-        className="c back"
-        style={{
-          backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(0, 0, 0, 1)), url(${backImage})`,
-          opacity,
-          transform: transform.interpolate((t) => `${t} rotateX(180deg)`)
-        }}
-      >
-        {/* <div className="imageBack"
-            backgroundImage="linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),
-
-        url(" + backImage + ")"
-        /> */}
-
-        <div className="movieInfo">
-       {movieState.description}
-       <p>
-       <StarRoundedIcon
-                    className={classes.ratingIcon}
-                    fontSize="large"
-                  />
-        <span>{`${movieState.rating}`} / 10</span>
-        </p>
+      <div>
+        <div onClick={() => set((state) => !state)}>
+          {matches ? null : thumbsDown}
+          <a.div
+            className="c front"
+            style={{
+              backgroundImage: `url(${frontImage})`,
+              opacity: opacity.interpolate((o) => 1 - o),
+              transform
+            }}
+          ></a.div>
+          <a.div
+            className="c back"
+            style={{
+              backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, .1) 10%, rgba(0, 0, 0, 1) 95%), url(${backImage})`,
+              opacity,
+              transform: transform.interpolate((t) => `${t} rotateX(180deg)`)
+            }}
+          >
+            <div className="movieInfo">
+              {movieState.description}
+              <StarRoundedIcon
+                className={classes.ratingIcon}
+                fontSize="large"
+              />
+              <span>{`${movieState.rating}`} / 10</span>
+            </div>
+          </a.div>
+          <Grid
+            container
+            className={classes.thumbsContainer}
+            direction="row"
+            justify="center"
+            alignContent="flex-end"
+            alignItems="center"
+          >
+            <Grid item style={{ marginRight: "5em" }}>
+              {matches ? thumbsDown : null}
+            </Grid>
+            <Grid item style={{ marginLeft: "5em" }}>
+              {matches ? thumbsUp : null}
+            </Grid>
+          </Grid>
+          {matches ? null : thumbsUp}
         </div>
-      </a.div>
-      <Grid
-          container
-          className={classes.thumbsContainer}
-          direction="row"
-          justify="center"
-          alignContent="flex-end"
-          alignItems="center"
-        >
-          <Grid item style={{ marginRight: "5em" }}>
-            {matches ? thumbsDown : null}
-          </Grid>
-          <Grid item style={{ marginLeft: "5em" }}>
-            {matches ? thumbsUp : null}
-          </Grid>
-        </Grid>
-        {matches ? null : thumbsUp}
-    </div>
-    </div>
-  </>
+      </div>
+    </>
   );
 }
