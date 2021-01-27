@@ -199,9 +199,9 @@ export default function FlipCard() {
   
   return (
     <>
-    <div className="container">
+    <div>
 
-    <div  onClick={() => set((state) => !state)}>
+    <div onClick={() => set((state) => !state)}>
     {matches ? null : thumbsDown}
       <a.div
         className="c front"
@@ -214,12 +214,17 @@ export default function FlipCard() {
       <a.div
         className="c back"
         style={{
-          // backgroundImage: `url(${backImage})`,
+          backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(0, 0, 0, 1)), url(${backImage})`,
           opacity,
           transform: transform.interpolate((t) => `${t} rotateX(180deg)`)
         }}
       >
-        <img className="imageBack" src={`${backImage}`} />
+        {/* <div className="imageBack"
+            backgroundImage="linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),
+
+        url(" + backImage + ")"
+        /> */}
+
         <div className="movieInfo">
        {movieState.description}
        <p>
