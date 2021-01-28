@@ -29,7 +29,6 @@ console.log(savedMovies);
     <div className="saved">
         <div>
         {savedMovies.map((movie, index ) => <button id={movie._id} onClick={() => deleteMovie(movie._id)}> {movie.title} </button> )}
-        {/* {savedBooks.map((book, index ) => <SavedCard key={index} {...book} />)} */}
         </div>
     </div>
   );
