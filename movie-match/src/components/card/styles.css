@@ -18,6 +18,10 @@ body,
   justify-content: center;
 }
 
+.thumbs {
+  margin-top: 20%;
+}
+
 /* .carddiv{
   margin: 0 auto;
   width: 100%;
@@ -29,26 +33,26 @@ body,
   height: 100%;
   cursor: pointer;
   will-change: transform, opacity;
+  margin-left: 5em;
+  margin-right: 5em;
 }
 .front {
   position: absolute;
   top: 15%;
-  left: 40%;
+  left: 33%;
   background: center;
   max-width: 30em;
   max-height: 45em;
   background-size: cover;
 }
 .back { 
-  position: fixed;
+  position: absolute;
   top: 20%;
-  left: 30%;
+  left: 21%;
   object-fit: contain;
   background-size: 100% 50%;
   background-repeat: no-repeat;
 }
-
-
 
 .movieInfo{
 color: white;
@@ -57,7 +61,7 @@ overflow-y: auto;
 z-index: 2;
 position: absolute;
 width: 100%;
-padding: 5px 5px 5px 5px;
+padding: 5px 0px 5px 0px;
 bottom: 43%;
 left: 0;
 font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import SavedCard from "../components/Savedcard";
+import MyMatches from "../components/MyMatches/MyMatches";
 import API from "../utils/API";
 
 function Saved() {
@@ -27,10 +28,7 @@ console.log(savedMovies);
 
   return (
     <div className="saved">
-        <div>
-        {savedMovies.map((movie, index ) => <button id={movie._id} onClick={() => deleteMovie(movie._id)}> {movie.title} </button> )}
-        {/* {savedBooks.map((book, index ) => <SavedCard key={index} {...book} />)} */}
-        </div>
+      <MyMatches />
     </div>
   );
 }

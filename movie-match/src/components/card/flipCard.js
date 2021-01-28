@@ -18,14 +18,13 @@ const useStyles = makeStyles((theme) => ({
   thumbsContainer: {
     margin: "3em"
   },
-  buttonContainer: {
-    margin: theme.spacing(1)
-  },
   thumbsUp: {
-    color: "darkGreen"
+    color: "darkGreen",
+    marginRight: "10em"
   },
   thumbsDown: {
-    color: theme.palette.common.red
+    color: theme.palette.common.red,
+    marginLeft: "10em"
   },
   rating: {
     fontSize: "22px",
@@ -164,38 +163,47 @@ export default function FlipCard() {
     addMovie(movieState);
   };
 
-  const thumbsDown = (
+  const thumbs = (
     <>
-      <Grid item>
-        <Button onClick={handleNo}>
-          <ThumbDownTwoToneIcon
-            className={classes.thumbsDown}
-            fontSize="large"
-          />
-        </Button>
+      <Grid 
+        container
+        direction="row"
+        justify="space-between"
+        className="thumbs"
+      >
+        <Grid item>
+          <Button onClick={handleNo}>
+            <ThumbDownTwoToneIcon
+              className={classes.thumbsDown}
+              fontSize="large"
+            />
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button onClick={handleYes}>
+            <ThumbUpTwoToneIcon
+              className={classes.thumbsUp}
+              fontSize="large"
+              color="primary"
+            />
+          </Button>
+        </Grid>
       </Grid>
     </>
+    
   );
 
   const thumbsUp = (
     <>
-      <Grid item>
-        <Button onClick={handleYes}>
-          <ThumbUpTwoToneIcon
-            className={classes.thumbsUp}
-            fontSize="large"
-            color="primary"
-          />
-        </Button>
-      </Grid>
+
     </>
   );
 
   return (
     <>
       <div>
+          {matches ? null : thumbs}
         <div className="carddiv" onClick={() => set((state) => !state)}>
-          {matches ? null : thumbsDown}
           <a.div
             className="c front"
             style={{
@@ -232,13 +240,12 @@ export default function FlipCard() {
             alignItems="center"
           >
             <Grid item style={{ marginRight: "5em" }}>
-              {matches ? thumbsDown : null}
+              {matches ? thumbs : null}
             </Grid>
             <Grid item style={{ marginLeft: "5em" }}>
               {matches ? thumbsUp : null}
             </Grid>
           </Grid>
-          {matches ? null : thumbsUp}
       </div>
     </>
   );
