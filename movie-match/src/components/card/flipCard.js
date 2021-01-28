@@ -194,7 +194,7 @@ export default function FlipCard() {
   return (
     <>
       <div>
-        <div onClick={() => set((state) => !state)}>
+        <div className="carddiv" onClick={() => set((state) => !state)}>
           {matches ? null : thumbsDown}
           <a.div
             className="c front"
@@ -221,7 +221,9 @@ export default function FlipCard() {
               <span>{`${movieState.rating}`} / 10</span>
             </div>
           </a.div>
-          <Grid
+         
+        </div>
+        <Grid
             container
             className={classes.thumbsContainer}
             direction="row"
@@ -237,7 +239,6 @@ export default function FlipCard() {
             </Grid>
           </Grid>
           {matches ? null : thumbsUp}
-        </div>
       </div>
     </>
   );

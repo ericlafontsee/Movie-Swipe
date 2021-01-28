@@ -18,28 +18,36 @@ body,
   justify-content: center;
 }
 
+/* .carddiv{
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+} */
 .c {
   position: relative;
-  width: 100%;
+  width: 50%;
   height: 100%;
   cursor: pointer;
   will-change: transform, opacity;
 }
-
 .front {
   position: absolute;
+  top: 15%;
+  left: 40%;
   background: center;
-  max-width: 15em;
-  max-height: 35em;
+  max-width: 30em;
+  max-height: 45em;
   background-size: cover;
 }
-
 .back { 
-  position: absolute;
+  position: fixed;
+  top: 20%;
+  left: 30%;
   object-fit: contain;
   background-size: 100% 50%;
   background-repeat: no-repeat;
 }
+
 
 
 .movieInfo{
