@@ -7,10 +7,7 @@ import useMedia from './useMedia';
 import './styles.css';
 import API from "../../utils/API";
 
-
-
-
-export default function MyMatches(props) {
+export default function MyMatches() {
   const [savedMovies, setSavedMovies] = useState([]);
   useEffect(() => {
     API.getMatches()
@@ -22,16 +19,15 @@ export default function MyMatches(props) {
 
 savedMovies.map(movie => {
      movie.css = 'url(https://www.themoviedb.org/t/p/w600_and_h900_bestv2' + movie.posterImage + ')';
-     movie.height = 300;
+     movie.height = 900;
   })
 
-let data = props.data;
   // Hook1: Tie media queries to the number of columns
-  const columns = useMedia(['(min-width: 1500px)', '(min-width: 1000px)', '(min-width: 600px)'], [5, 4, 3], 2)
+  const columns = useMedia(['(min-width: 600px)', '(min-width: 600px)', '(min-width: 600px)', '(min-width: 600px)'], [5, 4, 3, 2], 1)
+
   // Hook2: Measure the width of the container element
   const [bind, { width }] = useMeasure()
-  // Hook3: Hold items
-  const [items, set] = useState(data)
+
   // Hook5: Form a grid of stacked items using width & columns we got from hooks 1 & 2
   const [heights, gridItems] = useMemo(() => {
     let heights = new Array(columns).fill(0) // Each column gets a height starting with zero
@@ -42,7 +38,7 @@ let data = props.data;
     })
     return [heights, gridItems]
   }, [columns, savedMovies, width]);
-  console.log(savedMovies);
+
   // Hook6: Turn the static grid values into animated transitions, any addition, removal or change will be animated
   const transitions = useTransition(gridItems, (movie) => movie.css, {
     from: ({ xy, width, height }) => ({ xy, width, height, opacity: 0 }),
@@ -57,7 +53,7 @@ let data = props.data;
     <div {...bind} class="list" style={{ height: Math.max(...heights) }}>
       {transitions.map(({ item, props: { xy, ...rest }, key }) => (
         <a.div key={key} style={{ transform: xy.interpolate((x, y) => `translate3d(${x}px,${y}px,0)`), ...rest }}>
-          <div style={{ backgroundImage: item.css }} />
+          <div className="movie" style={{ backgroundImage: item.css }} />
         </a.div>
       ))}
     </div>
