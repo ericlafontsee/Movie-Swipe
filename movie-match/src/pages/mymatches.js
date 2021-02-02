@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MyMatches from "../components/MyMatches/MyMatches";
-// import API from "../utils/API";
+import API from "../utils/API";
 
 function Saved() {
   // const [savedMovies, setSavedMovies] = useState([]);

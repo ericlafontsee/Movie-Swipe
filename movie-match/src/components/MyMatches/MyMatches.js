@@ -4,10 +4,9 @@ import useMeasure from "./useMeasure";
 import useMedia from "./useMedia";
 import "./styles.css";
 import API from "../../utils/API";
-import Backdrop from "@material-ui/core/Backdrop";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
+import Backdrop from "@material-ui/core/Backdrop";
 
 export default function MyMatches() {
   const useStyles = makeStyles((theme) => ({
@@ -18,15 +17,24 @@ export default function MyMatches() {
   }));
 
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleClose = () => {
     setOpen(false);
   };
+
   const handleToggle = () => {
     setOpen(!open);
   };
 
   const [savedMovies, setSavedMovies] = useState([]);
+  savedMovies.map((movie) => {
+    movie.css =
+      "url(https://www.themoviedb.org/t/p/w600_and_h900_bestv2" +
+      movie.posterImage +
+      ")";
+    movie.height = 900;
+  });
+  
   useEffect(() => {
     API.getMatches()
       .then((res) => {
@@ -35,13 +43,7 @@ export default function MyMatches() {
       .catch((err) => console.log(err));
   }, []);
 
-  savedMovies.map((movie) => {
-    movie.css =
-      "url(https://www.themoviedb.org/t/p/w600_and_h900_bestv2" +
-      movie.posterImage +
-      ")";
-    movie.height = 900;
-  });
+ 
 
   // Hook1: Tie media queries to the number of columns
   const columns = useMedia(
@@ -97,7 +99,7 @@ export default function MyMatches() {
               style={{ width: "100%", height: "100%", opacity: "0" }}
               variant="outlined"
               color="primary"
-              onClick={handleToggle(ev)}
+              onClick={handleToggle}
             />
           </div>
         </a.div>
