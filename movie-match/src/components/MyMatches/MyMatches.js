@@ -18,12 +18,14 @@ export default function MyMatches() {
 
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [expandMovie, setExpandMovie] = useState();
   const handleClose = () => {
     setOpen(false);
   };
 
-  const handleToggle = () => {
+  const handleToggle = (item) => {
     setOpen(!open);
+    console.log("item", item);
   };
 
   const [savedMovies, setSavedMovies] = useState([]);
@@ -94,14 +96,7 @@ export default function MyMatches() {
             ...rest
           }}
         >
-          <div style={{ backgroundImage: item.css }}>
-            <Button
-              style={{ width: "100%", height: "100%", opacity: "0" }}
-              variant="outlined"
-              color="primary"
-              onClick={handleToggle}
-            />
-          </div>
+          <div style={{ backgroundImage: item.css }} onClick={(e) => handleToggle(item)}/>
         </a.div>
       ))}
 
@@ -110,8 +105,6 @@ export default function MyMatches() {
         open={open}
         onClick={handleClose}
       >
-
-
       </Backdrop>
     </div>
   );
