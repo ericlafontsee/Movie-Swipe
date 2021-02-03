@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default {
    
-  // Gets all movies
+// Gets all movies
   getMovies: function (pageNumber) {
     return axios.get(
       // Gets all movies
@@ -22,5 +22,14 @@ export default {
   },
   saveMovie: function (movieData) {
     return axios.post("/api/movies", movieData);
+  },
+  createUser: function(userData) {
+    return axios.post("/api/users/", userData);
+  },
+  getUser: function(userData) {
+    return axios.get("/api/users/" + userData);
+  },
+  deleteUser: function(userId) {
+    return axios.delete("/api/users/" + userId);
   }
 };
