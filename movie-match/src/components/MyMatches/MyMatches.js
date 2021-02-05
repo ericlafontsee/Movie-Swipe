@@ -7,15 +7,28 @@ import API from "../../utils/API";
 import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import StarRoundedIcon from "@material-ui/icons/StarRounded";
+import HighlightOffSharpIcon from '@material-ui/icons/HighlightOffSharp';
 
 export default function MyMatches() {
   const useStyles = makeStyles((theme) => ({
     backdrop: {
       zIndex: theme.zIndex.drawer + 1,
       backgroundColor: "rgba(0, 0, 0, 0.85)",
+      width: '100%',
+      height: '100%',
+      overflow: 'hidden',
+      display: 'flex'
     },
     expand: {
-     alignItems: null
+      margin: '0 auto',
+     alignItems: 'center',
+     width: '100%',
+     height: '100%',
+     backgroundSize: 'contain',
+     backgroundPosition: 'center center',
+     backgroundRepeat: 'no-repeat',
+     overflow: "hidden",
+     display: 'flex'
     }
   }));
 
@@ -39,7 +52,7 @@ export default function MyMatches() {
       <div
         className={classes.expand}
         style={{
-          backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, .1) 10%, rgba(0, 0, 0, 1) 95%), url(${frontImage})`
+          backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, .2) 5%, rgba(0, 0, 0, 1) 95%), url(${frontImage})`
         }}
       >
         <div className="movieInfo">
@@ -50,6 +63,18 @@ export default function MyMatches() {
       </div>
     </>
   );
+
+  function handleDelete(item){
+    console.log('item', item);
+    let id = item._id;
+    console.log('id', id);
+    API.deleteMovie(id)
+    .then(res => {
+      window.location.reload();
+    })
+    .catch(err => console.log(err));
+  }
+
 
   const [savedMovies, setSavedMovies] = useState([]);
   savedMovies.map((movie) => {
@@ -108,6 +133,7 @@ export default function MyMatches() {
   });
   // Render the grid
   return (
+    <>
     <div {...bind} class="list" style={{ height: Math.max(...heights) }}>
       {transitions.map(({ item, props: { xy, ...rest }, key }) => (
         <a.div
@@ -121,13 +147,14 @@ export default function MyMatches() {
           className="likedImage"
             style={{ backgroundImage: item.css }}
             onClick={(e) => handleToggle(item)}
-          />
+          ><HighlightOffSharpIcon onClick={(e) => handleDelete(item)} /></div>
         </a.div>
       ))}
-
-      <Backdrop className={classes.backdrop } open={open} onClick={handleClose}>
-        {open ? expandMovie : null}
-      </Backdrop>
+     
     </div>
+     {/* <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
+     {open ? expandMovie : null}
+   </Backdrop> */}
+   </>
   );
 }

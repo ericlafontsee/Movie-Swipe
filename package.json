@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/ericlafontsee/Movie-Swipe#readme",
   "dependencies": {
+    "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.1",
     "concurrently": "^5.3.0",
     "express": "^4.17.1",
