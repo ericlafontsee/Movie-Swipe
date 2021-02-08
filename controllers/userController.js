@@ -1,5 +1,6 @@
 const db = require("../models");
 
+
 module.exports = {
   create: function(req, res) {
     console.log(req.body);
@@ -12,7 +13,7 @@ module.exports = {
     db.User
       .findOne({email: req.params.email})
       .then(data => {res.json(data)})
-      .catch(err => res.status(422).json(err));
+      .catch(err => {console.log(err); res.status(422).json(err)});
   },
   remove: function(req, res) {
     db.User
