@@ -7,7 +7,7 @@ import API from "../../utils/API";
 import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import StarRoundedIcon from "@material-ui/icons/StarRounded";
-import HighlightOffSharpIcon from '@material-ui/icons/HighlightOffSharp';
+import HighlightOffOutlinedIcon from '@material-ui/icons/HighlightOffOutlined';
 
 export default function MyMatches() {
   const useStyles = makeStyles((theme) => ({
@@ -147,14 +147,14 @@ export default function MyMatches() {
           className="likedImage"
             style={{ backgroundImage: item.css }}
             onClick={(e) => handleToggle(item)}
-          ><HighlightOffSharpIcon onClick={(e) => handleDelete(item)} /></div>
+          ><HighlightOffOutlinedIcon fontSize="large" style={{ background: 'white'}} onClick={(e) => handleDelete(item)} /></div>
         </a.div>
       ))}
      
     </div>
-     {/* <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
+     <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
      {open ? expandMovie : null}
-   </Backdrop> */}
+   </Backdrop>
    </>
   );
 }
