@@ -12,6 +12,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 
+import API from '../../utils/API';
+
 const useStyles = makeStyles((theme) => ({
   heroContainer: {
     marginTop: "10em",
@@ -85,7 +87,17 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
   const classes = useStyles();
   const [ open, setOpen ] = useState(false);
-
+  const [ loggedIn, setLoggedIn ] = useState(false);
+  const [ upForm, setUpForm ] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: ""
+  });
+  const [ inForm, setInForm ] = useState({
+    email: "",
+    password: ""
+  })
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -94,12 +106,75 @@ export default function Login() {
     setOpen(false);
   };
 
+  function handleSignUp() {
+    if (!upForm.email) {
+      console.log("please enter an email address");
+      return;
+    } else if (!upForm.password) {
+      console.log("please enter a password");
+      return;
+    } else if (!upForm.firstName) {
+      console.log("please enter a first name");
+      return; 
+    } else if (!upForm.lastName) {
+      console.log("please enter a last name");
+      return;
+    } else {
+        API.createUser({...upForm}).then((response) => {
+          console.log(response);
+          return response;
+        })
+        .then((response) => {
+          console.log("response", response);
+          return response
+          setUpForm({
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: ""
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("Email address provided is already signed up");
+        });
+    }
+  }
+  
+  const handleChange = (e) => {
+    const name = e.target.name
+    const value = e.target.value
+    setUpForm({ ...upForm, [name]:value })
+  }
+
+  const handleSignInChange = (e) => {
+    const name = e.target.name
+    const value = e.target.value
+    setInForm({ ...inForm, [name]:value })
+  }
+
+  function handleSignIn(inForm) {
+    console.log(inForm);
+    if (!inForm.email) {
+      console.log("please enter your email");
+      return;
+    } else if (!inForm.password) {
+      console.log("please enter your password");
+      return;
+    } else {
+
+    }
+  }
+
   return (
     <>
       <Container className={classes.heroContainer}>
         <Card className={classes.card}>
           <CardContent className={classes.cardContent}>
-            <Button className={classes.button}>
+            <Button 
+              className={classes.button}
+              onClick={handleSignIn(inForm)}
+            >
               Admit
             </Button>
           <div className={classes.div}>
@@ -107,12 +182,20 @@ export default function Login() {
             <TextField 
               className={classes.email} 
               id="standard-basic" 
-              label="Email" 
+              label="Email"
+              name="email"
+              onChange = { (e) => {
+                handleSignInChange(e)
+              }}
             />
             <TextField 
               className={classes.password} 
               id="standard-basic" 
-              label="Password" 
+              label="Password"
+              name="password" 
+              onChange = { (e) => {
+                handleSignInChange(e)
+              }}
             />
             </form>
           </div>
@@ -145,22 +228,37 @@ export default function Login() {
                   <TextField
                   className={classes.leftQuestions}
                   label="First Name"
+                  required
+                  name="firstName"
+                  onChange={(e) => handleChange(e)}
                   />
                   <TextField
                   className={classes.rightQuestions}
                   label="Last Name"
+                  name="lastName"
+                  onChange={(e) => handleChange(e)}
                   />
                   <TextField
                   className={classes.leftQuestions}
                   label="Email"
+                  name="email"
+                  onChange={(e) => handleChange(e)}
                   />
                   <TextField
                   className={classes.rightQuestions}
                   label="password"
+                  name="password"
+                  onChange={(e) => handleChange(e)}
                   />
                   <Button 
                     className={classes.submitButton}
-                    variant="outlined">
+                    variant="outlined"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleSignUp(upForm);
+                      handleClose();
+                    }}
+                    >
                     Submit
                   </Button>
                 </form>
