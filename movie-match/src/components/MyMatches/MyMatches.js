@@ -4,29 +4,77 @@ import useMeasure from "./useMeasure";
 import useMedia from "./useMedia";
 import "./styles.css";
 import API from "../../utils/API";
-import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
+import StarRoundedIcon from "@material-ui/icons/StarRounded";
+import HighlightOffSharpIcon from '@material-ui/icons/HighlightOffSharp';
 
 export default function MyMatches() {
   const useStyles = makeStyles((theme) => ({
     backdrop: {
       zIndex: theme.zIndex.drawer + 1,
-      backgroundColor: "rgba(0, 0, 0, 0.85)"
+      backgroundColor: "rgba(0, 0, 0, 0.85)",
+      width: '100%',
+      height: '100%',
+      overflow: 'hidden',
+      display: 'flex'
+    },
+    expand: {
+      margin: '0 auto',
+     alignItems: 'center',
+     width: '100%',
+     height: '100%',
+     backgroundSize: 'contain',
+     backgroundPosition: 'center center',
+     backgroundRepeat: 'no-repeat',
+     overflow: "hidden",
+     display: 'flex'
     }
   }));
 
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [expandMovie, setExpandMovie] = useState();
+  const [clickedMovie, setClickedMovie] = useState({});
+  let frontImage =
+    "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" +
+    clickedMovie.posterImage;
   const handleClose = () => {
     setOpen(false);
   };
 
   const handleToggle = (item) => {
     setOpen(!open);
-    console.log("item", item);
+    setClickedMovie(item);
   };
+
+  const expandMovie = (
+    <>
+      <div
+        className={classes.expand}
+        style={{
+          backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, .2) 5%, rgba(0, 0, 0, 1) 95%), url(${frontImage})`
+        }}
+      >
+        <div className="movieInfo">
+          {clickedMovie.description}
+          <StarRoundedIcon className={classes.ratingIcon} fontSize="large" />
+          <span>{`${clickedMovie.rating}`} / 10</span>
+        </div>
+      </div>
+    </>
+  );
+
+  function handleDelete(item){
+    console.log('item', item);
+    let id = item._id;
+    console.log('id', id);
+    API.deleteMovie(id)
+    .then(res => {
+      window.location.reload();
+    })
+    .catch(err => console.log(err));
+  }
+
 
   const [savedMovies, setSavedMovies] = useState([]);
   savedMovies.map((movie) => {
@@ -36,7 +84,7 @@ export default function MyMatches() {
       ")";
     movie.height = 900;
   });
-  
+
   useEffect(() => {
     API.getMatches()
       .then((res) => {
@@ -44,8 +92,6 @@ export default function MyMatches() {
       })
       .catch((err) => console.log(err));
   }, []);
-
- 
 
   // Hook1: Tie media queries to the number of columns
   const columns = useMedia(
@@ -87,6 +133,7 @@ export default function MyMatches() {
   });
   // Render the grid
   return (
+    <>
     <div {...bind} class="list" style={{ height: Math.max(...heights) }}>
       {transitions.map(({ item, props: { xy, ...rest }, key }) => (
         <a.div
@@ -96,16 +143,18 @@ export default function MyMatches() {
             ...rest
           }}
         >
-          <div style={{ backgroundImage: item.css }} onClick={(e) => handleToggle(item)}/>
+          <div
+          className="likedImage"
+            style={{ backgroundImage: item.css }}
+            onClick={(e) => handleToggle(item)}
+          ><HighlightOffSharpIcon onClick={(e) => handleDelete(item)} /></div>
         </a.div>
       ))}
-
-      <Backdrop
-        className={classes.backdrop}
-        open={open}
-        onClick={handleClose}
-      >
-      </Backdrop>
+     
     </div>
+     {/* <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
+     {open ? expandMovie : null}
+   </Backdrop> */}
+   </>
   );
 }
