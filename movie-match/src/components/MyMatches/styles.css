@@ -1,5 +1,5 @@
 * {
-  overflow: auto !important;
+  overflow-y: visible !important;
 }
 
 .saved {

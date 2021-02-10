@@ -169,7 +169,7 @@ export default function Header(props) {
                         <IconButton 
                             color="inherit"
                             component={Link}
-                            to={"/matches"}
+                            to={"/liked"}
                             
                         >
                             <Badge badgeContent={null} color="secondary">
