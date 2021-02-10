@@ -40,6 +40,9 @@ const Item = styled(animated.div)`
   width: 100%;
   height: 100%;
   background: white;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
   border-radius: 5px;
   will-change: transform, opacity;
 `
