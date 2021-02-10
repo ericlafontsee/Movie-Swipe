@@ -17,7 +17,7 @@ import API from '../../utils/API';
 const useStyles = makeStyles((theme) => ({
   heroContainer: {
     marginTop: "10em",
-    width: "30em",
+    width: "32em",
   },
   hero: {
     marginTop: "10em",
@@ -25,21 +25,20 @@ const useStyles = makeStyles((theme) => ({
   },
   card: {
     boxShadow: "12px 12px 2px 1px rgba(0, 0, 255, .2)",
-    borderStyle: "groove"
-
+    borderStyle: "groove",
+    width: "100%",
   },
   cardHeader: {
     display: "inline-block",
   },
   cardContent: {
-    
   },
   div: {
     borderRight: "1px dashed grey",
-    height: "15em",
     marginTop: "-1em",
     marginBottom: "-2em",
     marginRight: "5em",
+
   },
   button: {
     backgroundColor: theme.palette.common.red,
@@ -51,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   email: {
     marginTop: "1.5em",
     marginLeft: "2em",
-    padding: ".5em"
+    padding: ".5em",
   },
   password: {
     marginTop: "1.5em",
@@ -79,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
   submitButton: {
     display: "block",
     margin: "auto",
-    marginTop: "1em"
+    marginTop: "1em",
   }
 
 }));
@@ -178,7 +177,7 @@ export default function Login() {
               Admit
             </Button>
           <div className={classes.div}>
-            <form>
+            <form style={{height:"100%"}}>
             <TextField 
               className={classes.email} 
               id="standard-basic" 
