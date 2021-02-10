@@ -145,18 +145,18 @@ export default function App() {
   return (
     <>
       <Global />
-      <h1>Liked Movies</h1>
-      <AspectRatioIcon
-        onClick={handleExpand}
-        style={{ display: displayExpand }}
-      />
       <MinimizeIcon
         onClick={handleMinimize}
         fontSize="large"
-        style={{ display: displayMinimize }}
+        style={{ display: displayMinimize, border: "2px black solid" }}
       />
-
       <Container style={{ ...rest, width: size, height: size }}>
+        <h1 style={{ display: displayExpand, color: 'white' }}>Liked Movies</h1>
+        <AspectRatioIcon
+          onClick={handleExpand}
+          style={{ display: displayExpand }}
+        />
+
         {transitions.map(({ item, key, props }) => (
           <Item
             key={key}
