@@ -38,6 +38,7 @@ export default function MyMatches() {
   let frontImage =
     "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" +
     clickedMovie.posterImage;
+    
   const handleClose = () => {
     setOpen(false);
   };

@@ -26,6 +26,7 @@ const Global = createGlobalStyle`
 const Container = styled(animated.div)`
   position: relative;
   display: grid;
+  margin: 50px auto;
   grid-template-columns: repeat(4, minmax(100px, 1fr));
   grid-gap: 25px;
   padding: 25px;

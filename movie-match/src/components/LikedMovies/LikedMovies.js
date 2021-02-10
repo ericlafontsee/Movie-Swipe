@@ -7,9 +7,25 @@ import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import StarRoundedIcon from "@material-ui/icons/StarRounded";
 import HighlightOffOutlinedIcon from "@material-ui/icons/HighlightOffOutlined";
+import AspectRatioIcon from "@material-ui/icons/AspectRatio";
+import MinimizeIcon from "@material-ui/icons/Minimize";
 
 export default function App() {
   const [open, set] = useState(false);
+  const [displayExpand, setDisplayExpand] = useState("block");
+  const [displayMinimize, setDisplayMinimize] = useState("none");
+
+  const handleExpand = () => {
+    set((open) => !open);
+    setDisplayExpand("none");
+    setDisplayMinimize("block");
+  };
+
+  const handleMinimize = () => {
+    set((open) => !open);
+    setDisplayExpand("block");
+    setDisplayMinimize("none");
+  };
 
   ////////////////////////////BackDrop-expand//////////////////////////////////
   const useStyles = makeStyles((theme) => ({
@@ -67,17 +83,16 @@ export default function App() {
     </>
   );
 
-  function handleDelete(item){
-    console.log('item', item);
+  function handleDelete(item) {
+    console.log("item", item);
     let id = item._id;
-    console.log('id', id);
+    console.log("id", id);
     API.deleteMovie(id)
-    .then(res => {
-      window.location.reload();
-    })
-    .catch(err => console.log(err));
+      .then((res) => {
+        window.location.reload();
+      })
+      .catch((err) => console.log(err));
   }
-
 
   //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -130,19 +145,37 @@ export default function App() {
   return (
     <>
       <Global />
-      <Container
-        style={{ ...rest, width: size, height: size }}
-        onClick={() => set((open) => !open)}
-      >
+      <MinimizeIcon
+        onClick={handleMinimize}
+        fontSize="large"
+        style={{ display: displayMinimize, border: "2px black solid" }}
+      />
+      <Container style={{ ...rest, width: size, height: size }}>
+        <h1 style={{ display: displayExpand, color: 'white' }}>Liked Movies</h1>
+        <AspectRatioIcon
+          onClick={handleExpand}
+          style={{ display: displayExpand }}
+        />
+
         {transitions.map(({ item, key, props }) => (
           <Item
             key={key}
             style={{ ...props, backgroundImage: item.css }}
             onClick={(e) => handleToggle(item)}
-          ><HighlightOffOutlinedIcon fontSize="large" style={{ background: 'white'}} onClick={(e) => handleDelete(item)} /></Item>
+          >
+            <HighlightOffOutlinedIcon
+              fontSize="large"
+              style={{ background: "white" }}
+              onClick={(e) => handleDelete(item)}
+            />
+          </Item>
         ))}
       </Container>
-      <Backdrop className={classes.backdrop} open={openBackDrop} onClick={handleClose}>
+      <Backdrop
+        className={classes.backdrop}
+        open={openBackDrop}
+        onClick={handleClose}
+      >
         {openBackDrop ? expandMovie : null}
       </Backdrop>
     </>
