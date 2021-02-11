@@ -9,7 +9,7 @@ import HighlightOffOutlinedIcon from "@material-ui/icons/HighlightOffOutlined";
 import AspectRatioIcon from "@material-ui/icons/AspectRatio";
 import MinimizeIcon from "@material-ui/icons/Minimize";
 
-export default function LikedMovies() {
+export default function MatchedMovies() {
   const [open, set] = useState(false);
   const [displayExpand, setDisplayExpand] = useState("block");
   const [displayMinimize, setDisplayMinimize] = useState("none");
@@ -118,8 +118,8 @@ export default function LikedMovies() {
   const { size, opacity, ...rest } = useSpring({
     ref: springRef,
     config: config.stiff,
-    from: { size: "20%", background: "red" },
-    to: { size: open ? "100%" : "20%", background: open ? "white" : "red" }
+    from: { size: "20%", background: "black" },
+    to: { size: open ? "100%" : "20%", background: open ? "white" : "black" }
   });
 
   const transRef = useRef();
@@ -151,10 +151,10 @@ export default function LikedMovies() {
         style={{ display: displayMinimize, border: "2px black solid" }}
       />
       <Container style={{ ...rest, width: size, height: size }}>
-        <h1 style={{ display: displayExpand, color: 'white' }}>Liked Movies</h1>
+        <h1 style={{ display: displayExpand, color: 'white' }}>Matched Movies</h1>
         <AspectRatioIcon
           onClick={handleExpand}
-          style={{ display: displayExpand }}
+          style={{ display: displayExpand, color: 'white' }}
         />
 
         {transitions.map(({ item, key, props }) => (
