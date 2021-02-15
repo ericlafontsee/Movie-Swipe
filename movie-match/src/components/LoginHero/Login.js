@@ -11,7 +11,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
-
 import API from '../../utils/API';
 
 const useStyles = makeStyles((theme) => ({
@@ -172,7 +171,7 @@ export default function Login() {
           <CardContent className={classes.cardContent}>
             <Button 
               className={classes.button}
-              onClick={handleSignIn(inForm)}
+              onClick={handleSignIn}
             >
               Admit
             </Button>
