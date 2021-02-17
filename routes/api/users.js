@@ -30,5 +30,20 @@ router
       res.send(userInfo);
     })
 
+router.post('/login',
+function (req, res, next) {
+
+  console.log('test', test);
+  next()
+},
+passport.authenticate('local'),
+(req, res) => {
+  var userInfo = {
+    username: req.user.username
+  };
+  res.send(userInfo);
+}
+)
+
 module.exports = router;
 
