@@ -21,5 +21,11 @@ module.exports = {
       .then(data => data.remove())
       .then(data => res.json(data))
       .catch(err => res.status(422).json(err));
+  },
+  update: function(req, res) {
+    User
+      .findOne(req.body)
+      .then(data => res.json(data))
+      .catch(err => res.status(422).json(err));
   }
 };

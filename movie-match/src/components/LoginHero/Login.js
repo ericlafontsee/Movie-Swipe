@@ -82,7 +82,10 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState({
+    loggedIn: false,
+    email: null
+  });
   const [upForm, setUpForm] = useState({
     firstName: "",
     lastName: "",
@@ -155,7 +158,7 @@ export default function Login() {
     setInForm({ ...inForm, [name]: value });
   };
 
-  function handleSignIn(inForm) {
+  function handleSignIn() {
     console.log(inForm);
     if (!inForm.email) {
       console.log("please enter your email");
@@ -164,6 +167,10 @@ export default function Login() {
       console.log("please enter your password");
       return;
     } else {
+      API.getLogin(inForm).then((response) => {
+        console.log(inForm);
+        }
+      )
     }
   }
 

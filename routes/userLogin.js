@@ -5,6 +5,32 @@ const router = express.Router();
 
 const User = require('../model/user');
 
+router.post('/', (req, res) => {
+    console.log('user signup');
+
+    const { username, password } = req.body
+    // ADD VALIDATION
+    User.findOne({ email: email }, (err, user) => {
+        if (err) {
+            console.log('User.js post error: ', err)
+        } else if (user) {
+            res.json({
+                error: `Sorry, already a user with the username: ${email}`
+            })
+        }
+        else {
+            const newUser = new User({
+                username: username,
+                password: password
+            })
+            newUser.save((err, savedUser) => {
+                if (err) return res.json(err)
+                res.json(savedUser)
+            })
+        }
+    })
+})
+
 router.post(
   '/login',
   function (req, res, next) {
@@ -16,9 +42,10 @@ router.post(
   (req, res) => {
       console.log('logged in', req.user);
       var userInfo = {
-          username: req.user.username
+          email: req.user.email
       };
       res.send(userInfo);
+      console.log('userinfo', userInfo);
   }
 )
 
@@ -35,7 +62,7 @@ router.get('/', (req, res, next) => {
 router.post('/logout', (req, res) => {
   if (req.user) {
       req.logout()
-      res.send({ msg: 'logging out' })
+      res.send({ msg: 'logging out' })d
   } else {
       res.send({ msg: 'no user to log out' })
   }
