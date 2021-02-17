@@ -66,9 +66,7 @@ export default function MyMatches() {
   );
 
   function handleDelete(item){
-    console.log('item', item);
     let id = item._id;
-    console.log('id', id);
     API.deleteMovie(id)
     .then(res => {
       window.location.reload();

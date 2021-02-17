@@ -170,8 +170,12 @@ export default function Login() {
     } else {
       API.getLogin(inForm).then((response) => {
         console.log("getLogin Response", response);
+        console.log('test', response.status);
+        if (response.status === 200) {
+          setInForm({ redirectTo: true });
+          console.log("inform", inForm);
         }
-      )
+      });
     }
   }
 
