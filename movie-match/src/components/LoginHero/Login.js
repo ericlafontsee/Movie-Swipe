@@ -168,7 +168,7 @@ export default function Login() {
       return;
     } else {
       API.getLogin(inForm).then((response) => {
-        console.log(inForm);
+        console.log(response);
         }
       )
     }

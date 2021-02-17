@@ -14,33 +14,33 @@ router
   .route('/:email')
   .get(userController.find);
 
-router
-  .post('/login',
-    function (req, res, next) {
-      console.log('routes/user.js, login, req.body: ');
-      console.log(req.body);
-      next();
-    },
-    passport.authenticate('local'),
-    (req, res) => {
-      console.log('logged in', req.user);
-      var userInfo = {
-        email: req.user.email
-      };
-      res.send(userInfo);
-    })
+// router
+//   .post('/login',
+//     function (req, res, next) {
+//       console.log('routes/user.js, login, req.body: ');
+//       console.log(req.body);
+//       next();
+//     },
+//     passport.authenticate('local'),
+//     (req, res) => {
+//       console.log('logged in', req.user);
+//       var userInfo = {
+//         email: req.user.email
+//       };
+//       res.send(userInfo);
+//     })
 
 router.post('/login',
 function (req, res, next) {
-
-  console.log('test', test);
+  console.log(req.body);
   next()
 },
 passport.authenticate('local'),
 (req, res) => {
   var userInfo = {
-    username: req.user.username
+    email: req.user.email
   };
+  console.log('userInfo', userInfo);
   res.send(userInfo);
 }
 )
