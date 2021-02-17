@@ -94,7 +94,8 @@ export default function Login() {
   });
   const [inForm, setInForm] = useState({
     email: "",
-    password: ""
+    password: "",
+    redirectTo: null
   });
   const handleClickOpen = () => {
     setOpen(true);
@@ -168,7 +169,7 @@ export default function Login() {
       return;
     } else {
       API.getLogin(inForm).then((response) => {
-        console.log(response);
+        console.log("getLogin Response", response);
         }
       )
     }

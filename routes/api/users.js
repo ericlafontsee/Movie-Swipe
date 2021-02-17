@@ -33,12 +33,13 @@ router
 router.post('/login',
 function (req, res, next) {
   console.log(req.body);
-  next()
+  next();
 },
 passport.authenticate('local'),
 (req, res) => {
   var userInfo = {
-    email: req.user.email
+    email: req.user.email,
+    password: req.user.password
   };
   console.log('userInfo', userInfo);
   res.send(userInfo);

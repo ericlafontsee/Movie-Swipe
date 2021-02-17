@@ -25,7 +25,6 @@ app.use(passport.session());
 app.use(session({ secret: "keyboard cat", resave: false, saveUninitialized: false }));
 
 
-
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
