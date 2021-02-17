@@ -17,7 +17,7 @@ function App() {
         <Switch>
           <Route
             exact
-            path="/"
+            path="/matching"
             component={MatchingPage}
           />
           <Route
@@ -27,7 +27,7 @@ function App() {
           />
           <Route
             exact
-            path="/login"
+            path="/"
             component={LoginPage}
           />
           <Route

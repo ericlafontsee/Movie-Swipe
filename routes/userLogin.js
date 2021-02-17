@@ -10,12 +10,12 @@ router.post('/', (req, res) => {
 
     const { username, password } = req.body
     // ADD VALIDATION
-    User.findOne({ username: username }, (err, user) => {
+    User.findOne({ email: email }, (err, user) => {
         if (err) {
             console.log('User.js post error: ', err)
         } else if (user) {
             res.json({
-                error: `Sorry, already a user with the username: ${username}`
+                error: `Sorry, already a user with the username: ${email}`
             })
         }
         else {
@@ -42,9 +42,10 @@ router.post(
   (req, res) => {
       console.log('logged in', req.user);
       var userInfo = {
-          username: req.user.username
+          email: req.user.email
       };
       res.send(userInfo);
+      console.log('userinfo', userInfo);
   }
 )
 

@@ -29,6 +29,9 @@ export default {
   getUser: function(userData) {
     return axios.get("/api/users/" + userData);
   },
+  getLogin: function(userData) {
+    return axios.get("/api/users/login", userData);
+  },
   deleteUser: function(userId) {
     return axios.delete("/api/users/" + userId);
   }
