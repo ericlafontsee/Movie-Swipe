@@ -98,6 +98,8 @@ export default function Login() {
     password: "",
     redirectTo: false
   });
+
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -169,15 +171,15 @@ export default function Login() {
       return;
     } else {
       API.getLogin(inForm).then((response) => {
-        console.log("getLogin Response", response);
         if (response.status === 200) {
           setInForm({ ...inForm, redirectTo: true });
-          console.log("inform", inForm.redirectTo);
         }
+
       });
     }
   }
 
+  
   if (inForm.redirectTo) {
     return <Redirect to={{ pathname: '/mymatches' }} />;
   } else {
